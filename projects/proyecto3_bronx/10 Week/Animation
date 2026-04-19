@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,800;1,800&display=swap" rel="stylesheet">
+
+    <title>Nicol Leon - Marina Samuels - Animation </title>
+    <style>
+        body{
+            background-color: #0d1b2a;
+            margin: 0;
+        }
+
+
+        h1, h4, p {
+            margin: 0;
+            color: #e0e1dd;
+        }
+
+        h1{
+            font-size: 4vw;
+        }
+
+        .mulish {
+            font-family: "Mulish", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 800;
+            font-style: normal;
+        }
+
+        div {
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 20px;
+        max-width: 1200px;
+        min-width: 320px;
+        margin: 0 auto;
+        }
+
+        .big-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100vh;
+            width: 100%;
+            padding: 20px;
+        }
+
+        .headline-container {
+            text-align: center;
+            width: 100%;
+            max-width: 1200px;
+            display: block;
+        }
+
+        .BYLINE{
+            font-style: italic;
+            margin: 40px;
+        }
+
+        .intro{
+            margin: 0 auto;
+            max-width: 1200px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .database {
+            background-color: #a9d6e5;
+            padding: 10px;
+            text-align: center;
+            width: 100%;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .datainfo{
+            color: black;
+            text-align: center;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            font-style: italic;
+            font-size: 12px;
+        }
+
+        .search-bar {
+        background-color: #0d1b2a;
+        padding: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        box-sizing: border-box;
+        }
+
+        .input-group {
+            flex: 1 1 200px;
+            display: flex;
+            justify-content: center;
+            margin: 0%;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .search-button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .search-button:hover {
+            background-color: #0056b3;
+        }
+
+        .intro_text{
+            text-align: justify;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+    </style>
+
+</head>
+<body>
+    <div class="big-container">
+
+        <div class="top">
+            
+            <div class="headline-container">
+            <h1 class="mulish">Workers at Risk: Exposing Deadly Injuries at Companies</h1>
+            <p class="BYLINE">by Nicol Leon and Marina Samuels. Updated April 2025</p>
+            </div>
+
+            <div class="intro">
+            <p class="intro_text">This search tool, based on an OSHA database, locates on a map the companies where workers suffered severe injuries, across the United States, such as amputations, hospitalizations requiring in-patient care, or the loss of an eye, between January 2015 and July 2024.
+            </p>
+            <br>
+            <br>
+                <div class="database">
+                <p class="datainfo">This database, called "Severe Injury Reports," was collected by OSHA under Law 29-CFR 1904.39, which requires businesses to report these occurrences in their workplaces.</p>
+                </div>
+            </div>
+
+        <div class="search-bar">
+                <div class="input-group">
+                  <input type="text" placeholder="Zip Code" class="search-input" />
+                </div>
+              
+                <div class="input-group">
+                  <input type="text" placeholder="Company" class="search-input" />
+                </div>
+              
+                <div class="input-group">
+                  <input type="text" placeholder="Industry" class="search-input" />
+                </div>
+              
+                <div class="button-group">
+                  <button class="search-button">Search</button>
+                </div>
+              </div>
+        </div>

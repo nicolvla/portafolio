@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript: Document Object Model</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <style>
+
+        body{
+            background-color: #354f52;
+            margin: 0;
+            padding: 0;
+        }
+
+        #container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            width: 100%;
+            box-sizing: border-box;
+            padding: 10px;
+        }
+
+        #container > div:not(.states) {
+            width: 200px;
+            height: 100px;
+            background-color: #582f0e;
+        }
+
+        #container > div.states {
+            width: 400px;
+            max-width: 600px;
+            margin: 0;
+            height: auto;
+            background-color: #eae0d5;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 4px solid #003049;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+
+        #container {
+            display: flex;
+            gap: 10px;
+        }
+
+        p.meanincome {
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 0.5px;
+            color: #c2c5aa;
+            padding: 10px;
+            text-align: center;
+            background-color: #003049;
+            border-radius: 5px;
+            display: block;
+            margin: 10px;
+            width: auto;
+        }
+
+        .states .meanincome {
+            align-self: center;
+        }
+
+        h3{
+                color: #ffce63;
+                text-align: center;
+                font-family: "Bebas Neue", sans-serif;
+                font-size: 36px;
+            }
+
+        #dropdown-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+            text-align: center;
+            padding: 0 18px;
+        }
+
+        #filter-select {
+            padding: 10px 15px;
+            font-family: "Urbanist", sans-serif;
+            font-size: 13px;
+            border: none;
+            border-radius: 8px;
+            background-color: #b6ad90;
+            color: #003049;
+            cursor: pointer;
+        }
+
+        #filter-select:hover {
+            background-color: #ffce63;
+            transform: scale(1.02);
+        }
+
+        h2{
+            font-family: "Urbanist", sans-serif;
+            text-align: center;
+        }
+
+        p{
+            font-family: "Urbanist", sans-serif;
+            text-align: justify;
+            margin: 8px;
+        }
+
+        /* INTRO / HEADER ART */
+        .intro-panel {
+            max-width: 900px;
+            margin: 0 auto 18px auto;
+            background: rgba(0, 48, 73, 0.28);
+            border: 2px solid #b6ad90;
+            border-radius: 14px;
+            padding: 20px 22px 16px 22px;
+            box-sizing: border-box;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        }
+
+        .intro-accent {
+            width: 120px;
+            height: 6px;
+            background: linear-gradient(to right, #ffce63, #b6ad90);
+            border-radius: 999px;
+            margin: 0 auto 14px auto;
+        }
+
+        .intro-text {
+            max-width: 760px;
+            margin: 0 auto 14px auto;
+            font-family: "Urbanist", sans-serif;
+            font-size: 14px;
+            line-height: 1.65;
+            color: #eae0d5;
+            text-align: center;
+        }
+
+        .intro-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .intro-pill {
+            font-family: "Urbanist", sans-serif;
+            font-size: 12px;
+            letter-spacing: 0.3px;
+            color: #003049;
+            background-color: #ffce63;
+            padding: 8px 12px;
+            border-radius: 999px;
+            font-weight: 700;
+        }
+
+        /* CREDIT BOX */
+        .credit-box {
+            width: 100%;
+            background: rgba(0, 48, 73, 0.35);
+            margin-top: 40px;
+            padding: 40px 20px;
+            box-sizing: border-box;
+        }
+
+        .credit-box p {
+            max-width: 700px;
+            margin: 0 auto;
+            font-family: "Urbanist", sans-serif;
+            font-size: 13px;
+            line-height: 1.6;
+            color: #eae0d5;
+            text-align: center;
+        }
+
+        .credit-box a {
+            color: #ffce63;
+            text-decoration: underline;
+        }
+
+        .credit-box a:hover {
+            opacity: 0.7;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="dropdown-container">
+        <h3>Single mothers face steep income gaps as poverty persists across U.S. states</h3>
+
+        <div class="intro-panel">
+            <div class="intro-accent"></div>
+
+            <p class="intro-text">
+                <p class="intro-text">
+                For many single mothers, escaping poverty requires a bigger income gap than most states can close. This project uses data from the U.S. Census Bureau’s American Community Survey 5-year estimates to compare how these households are affected across states, focusing on poverty levels, the number of families impacted, racial and ethnic concentration and the income gap that separates many of these families from economic stability.
+            </p>
+            </p>
+
+            <p class="intro-text">
+                Each card shows four key indicators for a state: how many single-mother families are living in poverty, the share they represent, the racial or ethnic group that makes up the largest portion of this population and the amount of income still needed to move above the poverty threshold. Together, these measures show that poverty is not distributed evenly. In some places, the number of affected families is especially large. In others, the financial shortfall is steeper, suggesting that escaping poverty may require a much bigger income jump.
+            </p>
+
+            <p class="intro-text">
+                Use the filters to sort the cards by states with the largest affected populations, by places where the income deficit is highest or by the racial majority among single mothers living in poverty. The label “High need for money” marks states where the income deficit rises above the median shortfall across the dataset, helping highlight where the burden is especially severe.
+            </p>
+            <div class="intro-accent"></div>
+        </div>
+
+        <select id="filter-select">
+            <option value="by-total">All states</option>
+            <option value="by-state">By state with the highest number of single mothers in poverty</option>
+            <option value="by-income">By high amount of money required to get out of poverty</option>
+            <option value="by-black">By states where the majority are Black or African American</option>
+            <option value="by-white">By states where the majority are White</option>
+            <option value="by-hispanic">By states where the majority are Hispanic or Latino origin</option>
+            <option value="by-asian">By states where the majority are Asian alone</option>
+        </select>
+    </div>
+
+    <br>
+
+    <div id="container">
+
+        <!-- <div class="states" single-moms="money-high">
+            <h2>District of Columbia</h2>
+            <p>Number of single mothers: 43.859</p>
+            <p>Percentage: 32%</p>
+            <p>Race majority: Black or African American alone</p>
+            <p>Each single mother is short of $16.548 to get out of poverty</p>
+            <p class="meanincome">High</p>
+        </div>
+        <div class="states" single-moms="none">
+            <h2>Alabama</h2>
+            <p>Number of single mothers: 288.839</p>
+            <p>Percentage: 22%</p>
+            <p>Race majority: Black or African American alone</p>
+            <p>Each single mother is short of $13.729 to get out of poverty</p> -->
+
+    </div>
+
+    <script>
+
+        const states_mothers = [
+        {
+            state: "Alabama",
+            mothersfamilies: 288.839,
+            percentagefamilies: 22,
+            income: 13.729,
+            racemajority: "Black or African American alone"
+        },
+        {
+            state: "Alaska",
+            mothersfamilies: 27.367,
+            percentagefamilies: 16,
+            income: 13.560,
+            racemajority: "White alone"
+        },
+        {
+            state: "Arizona",
+            mothersfamilies: 343.764,
+            percentagefamilies: 19,
+            income: 15.249,
+            racemajority: "White alone"
+        },
+        {
+            state: "Arkansas",
+            mothersfamilies: 159.585,
+            percentagefamilies: 20,
+            income: 13.912,
+            racemajority: "White alone"
+        },
+        {
+            state: "California",
+            mothersfamilies: 1791283,
+            percentagefamilies: 20,
+            income: 13.769,
+            racemajority: "Hispanic or Latino origin (of any race)"
+        },
+        {
+            state: "Colorado",
+            mothersfamilies: 213.501,
+            percentagefamilies: 15,
+            income: 13.976,
+            racemajority: "White alone"
+        },
+        {
+            state: "Connecticut",
+            mothersfamilies: 185.599,
+            percentagefamilies: 20,
+            income: 13.952,
+            racemajority: "White alone"
+        },
+        {
+            state: "Delaware",
+            mothersfamilies: 54.734,
+            percentagefamilies: 21,
+            income: 12.362,
+            racemajority: "White alone"
+        },
+        {
+            state: "District of Columbia",
+            mothersfamilies: 43.859,
+            percentagefamilies: 32,
+            income: 16.548,
+            racemajority: "Black or African American alone"
+        },
+        {
+            state: "Florida",
+            mothersfamilies: 1122695,
+            percentagefamilies: 20,
+            income: 13.816,
+            racemajority: "White alone"
+        },
+        {
+            state: "Georgia",
+            mothersfamilies: 603.531,
+            percentagefamilies: 22,
+            income: 14.517,
+            racemajority: "Black or African American alone"
+        },
+        {
+            state: "Hawaii",
+            mothersfamilies: 57.322,
+            percentagefamilies: 17,
+            income: 13.690,
+            racemajority: "Asian alone"
+        },
+        {
+            state: "Idaho",
+            mothersfamilies: 66.569,
+            percentagefamilies: 13,
+            income: 14.878,
+            racemajority: "White alone"
+        },
+        {
+            state: "Illinois",
+            mothersfamilies: 591.083,
+            percentagefamilies: 19,
+            income: 14.307,
+            racemajority: "White alone"
+        },
+        {
+            state: "Indiana",
+            mothersfamilies: 309.384,
+            percentagefamilies: 18,
+            income: 13.802,
+            racemajority: "White alone"
+        },
+        {
+            state: "Iowa",
+            mothersfamilies: 118.623,
+            percentagefamilies: 15,
+            income: 12.616,
+            racemajority: "White alone"
+        },
+        {
+            state: "Kansas",
+            mothersfamilies: 115.732,
+            percentagefamilies: 16,
+            income: 13.992,
+            racemajority: "White alone"
+        },
+        {
+            state: "Kentucky",
+            mothersfamilies: 224.070,
+            percentagefamilies: 19,
+            income: 14.527,
+            racemajority: "White alone"
+        },
+        {
+            state: "Louisiana",
+            mothersfamilies: 286.114,
+            percentagefamilies: 25,
+            income: 13.312,
+            racemajority: "Black or African American alone"
+        },
+        {
+            state: "Maine",
+            mothersfamilies: 52.592,
+            percentagefamilies: 14,
+            income: 13.023,
+            racemajority: "White alone"
+        },
+        {
+            state: "Maryland",
+            mothersfamilies: 316.123,
+            percentagefamilies: 21,
+            income: 14.612,
+            racemajority: "Black or African American alone"
+        },
+        {
+            state: "Massachusetts",
+            mothersfamilies: 331.767,
+            percentagefamilies: 19,
+            income: 12.376,
+            racemajority: "White alone"
+        },
+        {
+            state: "Michigan",
+            mothersfamilies: 465.987,
+            percentagefamilies: 19,
+            income: 13.827,
+            racemajority: "White alone"
+        },
+        {
+            state: "Minnesota",
+            mothersfamilies: 200.104,
+            percentagefamilies: 14,
+            income: 12.910,
+            racemajority: "White alone"
+        },
+        {
+            state: "Mississippi",
+            mothersfamilies: 188.639,
+            percentagefamilies: 25,
+            income: 13.419,
+            racemajority: "Black or African American alone"
+        },
+        {
+            state: "Missouri",
+            mothersfamilies: 279.178,
+            percentagefamilies: 18,
+            income: 13.810,
+            racemajority: "White alone"
+        },
+        {
+            state: "Montana",
+            mothersfamilies: 37.625,
+            percentagefamilies: 14,
+            income: 13.288,
+            racemajority: "White alone"
+        },
+        {
+            state: "Nebraska",
+            mothersfamilies: 76.023,
+            percentagefamilies: 15,
+            income: 13.584,
+            racemajority: "White alone"
+        },
+        {
+            state: "Nevada",
+            mothersfamilies: 158.321,
+            percentagefamilies: 21,
+            income: 14.120,
+            racemajority: "White alone"
+        },
+        {
+            state: "New Hampshire",
+            mothersfamilies: 49.814,
+            percentagefamilies: 14,
+            income: 14.791,
+            racemajority: "White alone"
+        },
+        {
+            state: "New Jersey",
+            mothersfamilies: 455.541,
+            percentagefamilies: 19,
+            income: 13.191,
+            racemajority: "White alone"
+        },
+        {
+            state: "New Mexico",
+            mothersfamilies: 119.408,
+            percentagefamilies: 23,
+            income: 13.534,
+            racemajority: "Hispanic or Latino origin (of any race)"
+        },
+        {
+            state: "New York",
+            mothersfamilies: 1057201,
+            percentagefamilies: 23,
+            income: 13.625,
+            racemajority: "White alone"
+        },
+        {
+            state: "North Carolina",
+            mothersfamilies: 542.368,
+            percentagefamilies: 20,
+            income: 13.831,
+            racemajority: "White alone"
+        },
+        {
+            state: "North Dakota",
+            mothersfamilies: 21.869,
+            percentagefamilies: 11,
+            income: 12.731,
+            racemajority: "White alone"
+        },
+        {
+            state: "Ohio",
+            mothersfamilies: 584.204,
+            percentagefamilies: 20,
+            income: 13.638,
+            racemajority: "White alone"
+        },
+        {
+            state: "Oklahoma",
+            mothersfamilies: 195.429,
+            percentagefamilies: 19,
+            income: 14.432,
+            racemajority: "White alone"
+        },
+        {
+            state: "Oregon",
+            mothersfamilies: 181.635,
+            percentagefamilies: 17,
+            income: 13.014,
+            racemajority: "White alone"
+        },
+        {
+            state: "Pennsylvania",
+            mothersfamilies: 605.371,
+            percentagefamilies: 18,
+            income: 14.501,
+            racemajority: "White alone"
+        },
+        {
+            state: "Rhode Island",
+            mothersfamilies: 54.424,
+            percentagefamilies: 20,
+            income: 13.388,
+            racemajority: "White alone"
+        },
+        {
+            state: "South Carolina",
+            mothersfamilies: 292.963,
+            percentagefamilies: 21,
+            income: 13.389,
+            racemajority: "Black or African American alone"
+        },
+        {
+            state: "South Dakota",
+            mothersfamilies: 30.833,
+            percentagefamilies: 13,
+            income: 13.999,
+            racemajority: "White alone"
+        },
+        {
+            state: "Tennessee",
+            mothersfamilies: 359.305,
+            percentagefamilies: 19,
+            income: 14.104,
+            racemajority: "White alone"
+        },
+            {
+            state: "Texas",
+            mothersfamilies: 1473207,
+            percentagefamilies: 19,
+            income: 14.526,
+            racemajority: "Hispanic or Latino origin (of any race)"
+            },
+            {
+            state: "Utah",
+            mothersfamilies: 108.103,
+            percentagefamilies: 13,
+            income: 14.667,
+            racemajority: "White alone"
+            },
+            {
+            state: "Vermont",
+            mothersfamilies: 21.275,
+            percentagefamilies: 13,
+            income: 12.321,
+            racemajority: "White alone"
+            },
+            {
+            state: "Virginia",
+            mothersfamilies: 393.221,
+            percentagefamilies: 18,
+            income: 14.812,
+            racemajority: "White alone"
+            },
+            {
+            state: "Washington",
+            mothersfamilies: 293.453,
+            percentagefamilies: 15,
+            income: 14.369,
+            racemajority: "White alone"
+            },
+            {
+            state: "West Virginia",
+            mothersfamilies: 82.034,
+            percentagefamilies: 18,
+            income: 13.465,
+            racemajority: "White alone"
+            },
+            {
+                state: "Wisconsin",
+                mothersfamilies: 220.703,
+                percentagefamilies: 15,
+                income: 13.215,
+                racemajority: "White alone"
+            },
+            {
+                state: "Wyoming",
+                mothersfamilies: 21.280,
+                percentagefamilies: 14,
+                income: 13.585,
+                racemajority: "White alone"
+            },
+            {
+                state: "Puerto Rico",
+                mothersfamilies: 286.215,
+                percentagefamilies: 36,
+                income: 14.329,
+                racemajority: "Hispanic or Latino origin (of any race)"
+            }
+            ];
+
+        let container = document.getElementById('container');
+
+        function Cards(state, number, percentagemothers, race, meanincomedeficit){
+
+            let card = document.createElement('div');
+            card.classList.add('states');
+
+            let highIncomeBox = '';
+            if (meanincomedeficit > 13.806) {
+                highIncomeBox = '<p class="meanincome">High need for money</p>';
+            }
+
+            card.innerHTML = `<h2>${state}</h2><p><b>Number of single mothers:</b> ${number}</p><p><b>Percentage:</b> ${percentagemothers}%</p><p><b>Race majority:</b> ${race}</p><p>Each single mother is short of <b>$${meanincomedeficit}</b> to get out of poverty</p>${highIncomeBox}`;
+
+            container.append(card);
+
+        }
+
+        states_mothers.forEach(function(states){
+            Cards(states.state, states.mothersfamilies, states.percentagefamilies, states.racemajority, states.income);
+        })
+
+        document.getElementById('filter-select').addEventListener('change', function () {
+            const filterValue = this.value;
+            const allCards = document.querySelectorAll('#container > .states');
+
+            allCards.forEach(card => {
+                const stateName = card.querySelector('h2').textContent;
+                const stateData = states_mothers.find(s => s.state === stateName);
+
+                if (!stateData) return;
+
+                const race = stateData.racemajority;
+                const income = stateData.income;
+                const mothers = stateData.mothersfamilies;
+
+                let show = true;
+
+                switch (filterValue) {
+                    case 'by-income':
+                        show = income > 13.806;
+                        break;
+                    case 'by-state':
+                        show = mothers > 542.368;
+                        break;
+                    case 'by-black':
+                        show = race === "Black or African American alone";
+                        break;
+                    case 'by-white':
+                        show = race === "White alone";
+                        break;
+                    case 'by-hispanic':
+                        show = race.includes("Hispanic or Latino");
+                        break;
+                    case 'by-asian':
+                        show = race === "Asian alone";
+                        break;
+                    case 'by-total':
+                    default:
+                        show = true;
+                }
+
+                card.style.display = show ? 'block' : 'none';
+            });
+        });
+    </script>
+
+    <!-- CREDIT BOX -->
+    <div class="credit-box">
+        <p>
+            Reporting and data analysis by <strong>Nicol León Arge</strong>. Developed as part of the Coding the News class at the Craig Newmark Graduate School of Journalism at CUNY, this project draws on U.S. Census Bureau data from the American Community Survey (ACS) 5-year estimates to examine the economic conditions of households led by single mothers across the United States. 
+            View the dataset and methodology <a href="https://github.com/nicolvla/SingleMothersPoverty" target="_blank">here</a>.
+        </p>
+    </div>
+
+</body>
+</html>

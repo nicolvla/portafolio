@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+
+    <title>Nicol Leon First Website</title>
+    <style>
+
+    @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+
+        body{
+            background-color: #edf2f4;
+            margin: 0;
+        }    
+
+        h1, h4, p {
+            margin: 0;
+        }
+
+        h1{
+            font-family: "DM Serif Text", serif;
+            color: black;
+            font-weight: 700;
+            font-style: normal;
+            font-size: 36px;
+            text-align: center;
+            margin: 150px 20px 0px 2px;
+            padding-bottom: 60px;
+            padding-top: 60px;
+            padding-left: 30px;
+            padding-right: 30px;
+        }
+
+        h4{
+            font-family: "Open Sans", serif;
+            font-weight: 600;
+            color: black;
+            font-size: 15px;
+            text-align: center;
+            margin: 0px 100px 40px 100px
+        }
+
+        div.big-container {
+            display: block;
+            margin-bottom: 0;
+            position: relative;
+        }
+
+        div.top{
+            margin: 0;
+            display: flex;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        div.headline-container {
+            width: 50%;
+            height: auto;
+            font-size: 30px;
+            float: left;
+            background-color: #956e7b;
+            
+        }
+
+        div.picture-container{
+            display: flex;
+            float: right;
+            width: 50%;
+            height: auto;
+            justify-content: flex-start;
+        }
+
+        img{
+            width: 100%;
+            float: right;
+        }
+
+        div.story-container{
+            position: relative;
+            width: 60%;
+            top: 100%;
+            left: 20%;
+            right: 20%;
+            margin: 0;
+            min-height: 200vh;
+        }
+
+        p{
+            font-family: "Open Sans", sans-serif;
+            color: black;
+            font-size: 18px;
+            text-align: justify;
+            margin: auto;
+            padding: 6px;
+        }
+
+        p.BYLINE{
+            font-size: 13px;
+            margin: auto;
+            text-align: center;
+            color: black;
+        }
+
+        p.date{
+            font-size: 13px;
+            margin: 0px 0px 100px 0px;
+            text-align: center;
+            color: black;
+        }
+
+        p.caption{
+            margin: 0;
+            font-size: small;
+            text-align: left;
+        }
+
+        span.credits{
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        video{
+            margin-top: 5%;
+            margin-bottom: 5%;
+            border: 5px
+        }
+
+        .picture{
+            margin-top: 5%;
+        }
+
+        p.quotes{
+            position: absolute;
+            font-family: "Permanent Marker", serif;
+            color: #956e7b;
+            opacity: 30%;
+            width: auto;
+            font-size: 90px;
+            text-align: left;
+            margin-bottom: 0px;
+            transform: translateY(-70px)
+        }
+
+        p.quote{
+            position: absolute;
+            font-family: "Permanent Marker", serif;
+            color: #956e7b;
+            opacity: 30%;
+            width: auto;
+            font-size: 90px;
+            margin-bottom: 0px;
+            transform: translateY(-50%) translateX(800px)
+        }
+
+        h2{
+            font-family: "DM Serif Text", serif;
+            font-size: 20px;
+            margin-top: 0px;
+            margin-right: 4%;
+            margin-left: 2%;
+            text-align: right;
+        }
+
+        hr{
+            height: 3px;
+            margin-top: 50px;
+            margin-bottom: 50px;
+            background-color: #956e7b;
+        }
+
+        @media (max-width: 1200px) {
+
+            *{
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            html, body{
+                width: 100%;
+                background-color: #edf2f4;
+                margin: 0;
+                overflow-x: hidden;
+            }
+            
+            .top{
+                height: 400%;
+                width: 100%;
+                background-color: #956e7b;
+                display: flex;
+                justify-content: space-around;
+                flex-direction: column;
+                align-content: center;
+            }
+
+            .top > div{
+                height: 400%;
+                width: 100%;
+                background-color: #956e7b;
+                display: flex;
+                align-content: center;
+                margin: 0;
+                position: relative;
+            }
+
+            div.headline-container {
+                width: auto;
+                height: 450px;
+                font-size: 10px;
+                text-align: center;
+                flex-direction: column;
+                justify-content: flex-start;
+                padding: 20px;
+                background-color: #956e7b;
+        
+            }
+
+            h1 {
+            font-family: "DM Serif Text", serif;
+            margin-top: 90px;
+            padding: 0;
+            display: block;
+            text-align: center;
+            color: black;
+            font-style: normal;
+            font-size: 20px;
+            }
+
+            div.picture-container{
+                height: auto;
+                width: auto;
+                display: flex;
+                justify-content: flex-start;
+            }
+
+            h4{
+            font-family: "Open Sans", serif;
+            color: black;
+            font-size: 13px;
+            margin-top: 25px;
+            margin-left: 80px;
+            margin-right: 80px;
+            margin-bottom: 10px
+            }
+
+            div.story-container{
+            position: relative;
+            width: 80%;
+            margin: 0;
+            top: 100%;
+            left: 10%;
+            right: 10%;
+            min-height: 200vh;
+            }
+
+            p{
+            font-family: "Open Sans", sans-serif;
+            color: black;
+            font-size: 12px;
+            text-align: justify;
+            margin: auto;
+            padding: 3px;
+            }
+
+            p.BYLINE{
+            font-size: 10px;
+            text-align: center;
+            color: black;
+            margin-top: 30px;
+            margin-bottom: 0;
+            }
+
+            p.date{
+            font-size: 9px;
+            text-align: center;
+            color: black;
+            margin-top: 10px;
+            }
+
+            p.caption{
+            margin: 0;
+            font-size: 8px;
+            text-align: left;
+            }
+
+            span.credits{
+            font-size: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            }
+
+            p.quotes{
+            font-family: "Permanent Marker", serif;
+            color: #956e7b;
+            opacity: 30%;
+            width: auto;
+            font-size: 50px;
+            text-align: left;
+            margin-bottom: 0px;
+            position: absolute;
+            transform: translateY(-40px)
+            }
+
+            p.quote{
+            font-family: "Permanent Marker", serif;
+            color: #956e7b;
+            opacity: 30%;
+            position: absolute;
+            float: none;
+            height: auto;
+            width: auto;
+            text-align: right;
+            font-size: 50px;
+            margin-bottom: 0px;
+            transform: translateY(-40px) translateX(320px)
+            }
+
+            h2{
+            font-family: "DM Serif Text", serif;
+            font-size: 15px;
+            margin-top: 0px;
+            margin-bottom: 3%;
+            margin-right: 6%;
+            margin-left: 6%;
+            text-align: right;
+            }
+
+            hr{
+            height: 3px;
+            margin-top: 50px;
+            margin-bottom: 50px;
+            background-color: #956e7b;
+            }
+        }
+
+                /* FOOTER / CREDIT BOX */
+        .credit-box {
+            width: 100%;
+            margin-top: 60px;
+            padding: 30px 20px;
+            background: rgba(149, 110, 123, 0.08);
+            border-top: 2px solid #956e7b;
+            box-sizing: border-box;
+        }
+
+        .credit-box p {
+            max-width: 800px;
+            margin: 0 auto;
+            font-family: "Open Sans", sans-serif;
+            font-size: 14px;
+            line-height: 1.7;
+            color: #000;
+            text-align: center;
+        }
+
+        .credit-box strong {
+            font-weight: 700;
+        }
+
+        .credit-box a {
+            color: #956e7b;
+            text-decoration: underline;
+        }
+
+        .credit-box a:hover {
+            opacity: 0.7;
+        }
+
+
+    </style>
+
+
+</head>
+<body>
+    <div class="big-container">
+
+        <div class="top">
+            <div class="headline-container">
+            <h1>After a Fire, Residents of One Bronx Building Have Waited Months For Repairs</h1>
+            <h4>After complaints about living conditions and then a fire, a court ordered the landlord to make repairs. Nine months later, tenants say the repairs have not been completed.
+            </h4>
+            <p class="BYLINE"> By Nicol Leon </p>
+            <p class="date"> February 8, 2025</p>
+            </div>
+
+            <div class="picture-container">
+            <img src="BronxBuilding copy 2.jpeg" alt="Bronxs building located in Highbridge">
+            </div>
+
+        </div>
+            <p class="caption">The tenants of the building located at 115 East 169th Street, in the Bronx, continue to wait for the landlord Denali Management of Yonkers to comply with the court ruling and make repairs to environments in poor condition.<span class="credits"> Photo Credit // Nicol Leon</span></p>
+         <br>
+         <br>
+        
+        
+         
+        <div class="story-container">
+        <p>Nelia Ruiz says that she has had to buy poison spray to treat every room in her apartment in the Highbridge section of the Bronx because, at any time of day, “thousands of cockroaches appear.” Most enter through a hole in the broken bathroom pipe, which also leaks water most of the time.</p>
+        <p>“Cockroaches come out of there, even white ones, which are the queens of cockroaches,” said Ruiz, sitting on a chair outside her apartment door. “I have to fumigate every day.”</p>
+        <p>Ruiz, 50, who came to New York from the Dominican Republic as a child and has lived in the building on 115 East 169th Street for 10 years, says the owner, Denali Management of Yonkers, has failed to address problems that she and eight other tenants have complained about to the New York City Department of Housing Preservation and Development (HPD) for almost two years. They include holes in ceilings, electrical issues, and rats and cockroaches.</p>
+        <p>The mice can cause infectious diseases like the Zika virus, Lyme disease, and rabies; meanwhile, cockroaches can trigger asthma and allergy symptoms, according to the Centers for Disease Control and Prevention (CDC), and the U.S. Department of Agriculture.</p>
+        <img src="NeliaRuiz.jpeg" alt="Nelia Ruiz talks about the elevator's damages" class="picture">
+        <p class="caption">Nelia Ruiz was one of the tenants that denounced the landlord Denali Management of Yonkers. <span class="credits"> Photo Credit // Nicol Leon</span></p>
+        <p>In a search of Denali properties, NYCity News Service found that this company is associated with 5 other properties, all located in the Bronx.</p>
+        <p>In January, tenants of the East 169th building filed suit in New York City Civil Court seeking to force Denali to make the repairs. A month later, a fire in nine apartments left the building “unfit for human habitation,” according to HPD. On April 22, Judge Krzysztof Lach ordered that the burned-out apartments be repaired by May and that the rodents and roaches be exterminated in individual apartments and the common areas. Nine months later, the repairs have not been completed, say the neighbors who filed the complaint, and the tenants of the burned apartments have not returned.</p>
+        <p>“We have continued to sue for all the violations that everyone has in their apartment,” Ruiz said. “Mine are not so big, but we have to fix them because I pay my rent to live with dignity.”</p>
+        <hr>
+        <div class="quote-box"><p class="quotes">"</p><h2>On April 22, Judge Krzysztof Lach ordered that the burned-out apartments be repaired by May and that the rodents and roaches be exterminated in individual apartments and the common areas</h2><p class="quote">"</p></div>
+        <hr>
+        <p>Since 2023, HPD has recorded 294 complaints from the tenants about problems including malfunctioning doors, radiators, appliances and smoke detectors; pests; mold, and broken windows, to name a few, according to a database analyzed. Of that total, 94 have yet to be resolved. </p>
+        <p>Ruiz lives next to two apartments closed by the fire. “It has been a year since the fire occurred,” she said. “I am not one of those affected, but I can tell you that there are three employees who are doing the repairs. That is why it is so slow.”</p>
+        <p>Now many of the fire victims are sleeping on family members’ couches. Denali has not offered them any temporary residence while repairs are made, according to a document sent by the tenants’ attorney to the Bronx Civil Court in September.</p>
+        <p>In April, Lach ordered Denali to make the necessary repairs outlined in both the neighbors’ complaint and the damage that the fire caused. He gave Denali a month to repair the broken ceilings, windows and walls of the burned apartments, and to restore gas and water, which had been cut off after the fire. Such hazards, according to HPD, are “dangerous to life, and detrimental to the health and safety of the occupant and other persons.”</p>
+        <p>The judge also ordered ceiling repairs in the other apartments and the extermination of cockroaches and rats.</p>
+        <video width="100%" autoplay loop muted>
+            <source src="CourtDecision.mp4" type="video/mp4">
+        </video>
+        <p>According to HPD, the repairs began in September, and by September, only 30% progress had been made. Ruiz, Glenys Abreu, Valentín López and other tenant plaintiffs say Denali has made only some non-urgent repairs, such as changing handles and installing door viewers, while pests and holes in the ceilings persist. When NYCity News Service asked this City’s department which is the current status of this case, they responded that they would respond with that information, but has since not responded. </p>
+        <p>Asked for comment, Denali responded that it had already made major repairs and work continues. It emphasized that it was working with neighbors and City Councilwoman Althea Stevens, who represents the neighborhood. Ruiz, Abreu and López confirmed that Stevens had offered her help in completing the repairs as soon as possible.</p>
+        <p>“With respect to 115 E. 169th St., we have been working directly with the building’s Tenants Association, individual tenants and Councilwoman Stevens to ensure that repairs are made and that we are in compliance with city regulations,” Denali said in October, through an email. “We have made significant progress and continue to address issues as they arise and when we are allowed access to make repairs. We look forward to finalizing the outstanding issues and continuing a productive landlord-tenant relationship.”</p>
+        <p>According to the court filing, in May – almost a month after the judge ordered the company to make the repairs – attorneys for Denali responded to the court that it was unfair to include the fire repairs with the plaintiffs’ complaints and asked for more time to review the filing.</p>
+        <hr>
+        <p class="quotes">"</p><h2 class="quote">Ruiz, Glenys Abreu, Valentín López and other tenant plaintiffs say Denali has made only some non-urgent repairs, such as changing handles and installing door viewers, while pests and holes in the ceilings persist</h2><p class="quote">"</p>
+        <hr>
+        <p>The tenants’ attorney, Douglas Henderson of Bronx Legal Services, said this argument, as well as a change of Denali’s attorneys when the case was already advanced and its failure to reach an agreement with the tenants despite assurances that it would do so, only seek to slow down the compliance process.</p>
+        <p>“The interesting thing is that the owner is fighting it,” Henderson said in a telephone interview. “We were on the verge of reaching an agreement, weren’t we? We went into talks with the owner to settle, but they weren’t serious. They were just dragging it out, and I said this in court. They were just stalling to make some repairs, and when we went back to court they would say ‘Hey, there are no repairs to be made.’”</p>
+        <p>According to the last affidavit HPD sent to the court in September, workers made it difficult for the authorities to gain access to the burned apartments, because the super never opened the door when they went to visit them. This made it impossible to corroborate whether any progress had been made. HPD was unable to document some repair work until Aug. 5.</p>
+        <p>On Sept. 3, HPD’s Inspector McKenzie said he “observed that in apartments 4D, 5D and 6D the cleanup and demolition of fire debris had been completed and new metal studs were being installed,” the document notes. “In apartments 4E, 5E and 6E plaster and paint were being applied. In apartment 2D, painting was in progress. In department 3D the drywall had been completed. In apartment 1D no work was in progress and no work had begun.”</p>
+        <img src="4D.jpeg" alt="One of the apartments affected by the fire" class="picture">
+        <p class="caption"> Tenants that were living in the apartment 4D before the fire can't come back because the tenants didn't finish the repairs ordered by a judge. <span class="credits"> Photo Credit // Nicol Leon </span></p>
+        <p>López, 40, an immigrant from the Dominican Republic, said cockroaches continue to appear inside his refrigerator and that bathroom tiles have not been replaced. </p>
+        <p>“They told me that they were going to change it and that they were going to see if they could get me some new ones,” he said, showing images to document his complaint. “But to this day they have done nothing.” </p>
+        <p>As of November, according to an affidavit signed by Abreu, 42, also from the Dominican Republic, her apartment was still infested with rats, the living room door frame was damaged and her apartment had 12 other problems.</p>
+        <p>“They exchanged an old stove for another old stove,” she said, “and in the fridge they also did the same thing. I told them ‘OK, but don’t let the cockroaches get into the stove,’ and they continue to get into the refrigerator.”</p>
+        <p>In view of Denali’s failure to complete the repairs, Ruiz says she and her neighbors have opted to continue meeting and to alert their lawyer about the progress of repairs.</p>
+        <p>“One day the manager comes and asks me, ‘And what would you do to stop the meetings?’ “ she said. Ruiz answered: “When you finish the repairs, everything will stop automatically. I will not have to say anything because nobody will ask for anything because there will be nothing to ask.”</p>
+        <video width="100%" autoplay loop muted>
+            <source src="Building.mp4" type="video/mp4">
+        </video>
+        </div>
+</div>
+
+<div class="credit-box">
+  <p>
+  Reporting and pictures by <strong>Nicol León Arge</strong>. This project was developed as part of the Craft of Journalism and the Coding the News class at the Craig Newmark Graduate School of Journalism at CUNY, with guidance from professors Ronny Rojas and Brenda Medina. The reporting was originally published by the New York City News Service. Read the original version <a href="https://www.nycitynewsservice.com/2025/01/29/after-a-fire-residents-of-one-bronx-building-have-waited-months-for-repairs/" target="_blank">here</a>.
+  </p>
+</div>
+
+    
+</body>
+</html>

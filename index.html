@@ -1,0 +1,1642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nicol León Arge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Caveat:wght@400;600&family=DM+Sans:wght@300;400;500&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="notebook"></div>
+
+<canvas id="gridCanvas" style="position:fixed; top:67px; left:0; width:100vw; height:calc(100vh - 67px); pointer-events:none; z-index:1;"></canvas>
+
+<header class="header" style="z-index:200;">
+
+  <!-- izquierda: My work + Contact -->
+  <div class="header-left" style="display:flex; align-items:center; gap:2rem;">
+    <div class="dropdown" id="projectsDD">
+      <button onclick="toggleDD()" class="nav-tooltip" data-tip="Mi trabajo">My work ▾</button>
+      <div class="dropdown-menu">
+        <button onclick="showPage('writing')" class="nav-tooltip-left" data-tip="Historias">Writing</button>
+        <button onclick="showPage('dataviz')" class="nav-tooltip-left" data-tip="Visualización de datos">Data Visualizations</button>
+      </div>
+    </div>
+    <a href="mailto:nicol.leonarge36@journalism.cuny.edu" class="nav-tooltip" data-tip="Contáctame">Contact me</a>
+  </div>
+
+  <!-- centro: nombre -->
+  <button class="logo" onclick="showPage('about')" style="position:absolute; left:50%; transform:translateX(-50%);">Nicol Leon Arge (she/her)</button>
+
+  <!-- derecha: About + Resume -->
+  <div class="header-right" style="display:flex; align-items:center; gap:2rem;">
+  <a onclick="showPage('about')" class="nav-tooltip" data-tip="Sobre mí">About Me</a>
+  <a onclick="refreshResumePage()" class="nav-tooltip" data-tip="CV">Resume</a>
+</div>
+
+  <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+
+</header>
+
+<!-- ABOUT -->
+<section class="page" id="page-about">
+  <div class="about-photo">
+    <img src="images/foto5.jpg" style="width:100%; height:100%; object-fit:cover; object-position:center 65%;">
+  </div>
+  <div class="about-copy-wrapper">
+    <div class="tape"></div>
+    <div class="about-copy">
+      <h1><span class="hola">¡Hola!</span></h1>
+      <p>Nicol León Arge is a bilingual (English/Spanish) reporter covering local news, focused on immigration and Latino communities in New York. Her work has appeared in Gothamist/WNYC Radio, Documented NY, The Arizona Republic, El País US/América, Palabra NAHJ, among others.</p>
+      <p>She focuses on building trust with communities, verifying information under tight deadlines and translating complex policies into clear stories.</p>
+      <p>She sees journalism as a counterbalance to power. She focuses on uncovering information that is essential for the public so people can better understand their rights and the systems that shape their lives.</p>
+      <p>She earned a Master's in Bilingual Journalism from the Craig Newmark Graduate School of Journalism at CUNY with a specialization in Data Journalism.</p>
+      <p>When she is not reporting she is usually drawing, reading graphic novels and horror literature, playing Age of Empires II or riding her bike.</p>
+      <p class="contact-line">
+  Signal: <span>@nicolleon.03</span> &nbsp;|&nbsp;
+  <a href="https://www.linkedin.com/in/nicol-l-550756374/?skipRedirect=true" target="_blank">LinkedIn</a>
+</p>
+    </div>
+  </div>
+</section>
+
+<!-- WRITING -->
+<section class="page project-page" id="page-writing">
+  <h2 onclick="resetFilters(); document.getElementById('page-writing').scrollTop = 0;" style="cursor:pointer;">Writing</h2>
+
+<div class="filters">
+
+  <!-- OUTLET -->
+  <div class="custom-filter nav-tooltip" data-tip="Medio" id="dropdown-medio">
+    <button type="button" class="custom-filter-btn" onclick="toggleFilterDropdown('dropdown-medio')">
+      <span id="dropdown-medio-label">Outlet</span>
+      <span class="custom-filter-arrow">▾</span>
+    </button>
+    <div class="custom-filter-menu">
+      <button type="button" onclick="setFilterValue('medio','documented','Documented NY')">Documented NY</button>
+      <button type="button" onclick="setFilterValue('medio','laalianza','La Alianza')">La Alianza</button>
+      <button type="button" onclick="setFilterValue('medio','gothamist','Gothamist/WNYC Radio')">Gothamist/WNYC Radio</button>
+      <button type="button" onclick="setFilterValue('medio','palabra','Palabra NAHJ')">Palabra NAHJ</button>
+      <button type="button" onclick="setFilterValue('medio','arizona','The Arizona Republic')">The Arizona Republic</button>
+      <button type="button" onclick="setFilterValue('medio','marcha','Marcha.org')">Marcha.org</button>
+      <button type="button" onclick="setFilterValue('medio','elpaisus','El País US')">El País US</button>
+      <button type="button" onclick="setFilterValue('medio','elpaisamerica','El País América')">El País América</button>
+      <button type="button" onclick="setFilterValue('medio','infobae','Infobae')">Infobae</button>
+      <button type="button" onclick="setFilterValue('medio','wayka','Wayka')">Wayka</button>
+      <button type="button" onclick="setFilterValue('medio','cosecharoja','Cosecha Roja')">Cosecha Roja</button>
+      <button type="button" onclick="setFilterValue('medio','larepublica','La República')">La República</button>
+    </div>
+  </div>
+
+  <!-- LANGUAGE -->
+  <div class="custom-filter nav-tooltip" data-tip="Idioma" id="dropdown-idioma">
+    <button type="button" class="custom-filter-btn" onclick="toggleFilterDropdown('dropdown-idioma')">
+      <span id="dropdown-idioma-label">Language</span>
+      <span class="custom-filter-arrow">▾</span>
+    </button>
+    <div class="custom-filter-menu">
+      <button type="button" onclick="setFilterValue('idioma','es','Español')">Español</button>
+      <button type="button" onclick="setFilterValue('idioma','en','English')">English</button>
+    </div>
+  </div>
+
+  <!-- TOPIC -->
+  <div class="custom-filter nav-tooltip" data-tip="Tema" id="dropdown-tema">
+    <button type="button" class="custom-filter-btn" onclick="toggleFilterDropdown('dropdown-tema')">
+      <span id="dropdown-tema-label">Topic</span>
+      <span class="custom-filter-arrow">▾</span>
+    </button>
+    <div class="custom-filter-menu">
+      <button type="button" onclick="setFilterValue('tema','immigration','Immigration')">Immigration</button>
+      <button type="button" onclick="setFilterValue('tema','labor','Labor')">Labor</button>
+      <button type="button" onclick="setFilterValue('tema','culture','Culture')">Culture</button>
+      <button type="button" onclick="setFilterValue('tema','crime','Crime')">Crime</button>
+      <button type="button" onclick="setFilterValue('tema','ny','New York Government')">New York Government</button>
+      <button type="button" onclick="setFilterValue('tema','nyc','Local NYC')">Local NYC</button>
+      <button type="button" onclick="setFilterValue('tema','protests','Protests in Perú')">Protests in Perú</button>
+      <button type="button" onclick="setFilterValue('tema','humantraf','Human Trafficking')">Human Trafficking</button>
+      <button type="button" onclick="setFilterValue('tema','humanrights','Human Rights')">Human Rights</button>
+      <button type="button" onclick="setFilterValue('tema','environment','Environment and Climate Change')">Environment and Climate Change</button>
+      <button type="button" onclick="setFilterValue('tema','elections','Elections')">Elections</button>
+      <button type="button" onclick="setFilterValue('tema','lgbt','LGBTQ+ Rights')">LGBTQ+ Rights</button>
+      <button type="button" onclick="setFilterValue('tema','genderviolence','Gender-Based Violence')">Gender-Based Violence</button>
+      <button type="button" onclick="setFilterValue('tema','education','Education')">Education</button>
+      <button type="button" onclick="setFilterValue('tema','health','Health')">Health</button>
+      <button type="button" onclick="setFilterValue('tema','peru','Peruvian Government')">Peruvian Government</button>
+    </div>
+  </div>
+
+  <!-- YEAR -->
+  <div class="custom-filter nav-tooltip" data-tip="Año" id="dropdown-year">
+    <button type="button" class="custom-filter-btn" onclick="toggleFilterDropdown('dropdown-year')">
+      <span id="dropdown-year-label">Year</span>
+      <span class="custom-filter-arrow">▾</span>
+    </button>
+    <div class="custom-filter-menu">
+      <button type="button" onclick="setFilterValue('year','2026','2026')">2026</button>
+      <button type="button" onclick="setFilterValue('year','2025','2025')">2025</button>
+      <button type="button" onclick="setFilterValue('year','2024','2024')">2024</button>
+      <button type="button" onclick="setFilterValue('year','2023','2023')">2023</button>
+      <button type="button" onclick="setFilterValue('year','2022','2022')">2022</button>
+      <button type="button" onclick="setFilterValue('year','2021','2021')">2021</button>
+      <button type="button" onclick="setFilterValue('year','2020','2020')">2020</button>
+      <button type="button" onclick="setFilterValue('year','2019','2019')">2019</button>
+    </div>
+  </div>
+
+  <!-- RESET -->
+  <div class="filter-wrap">
+  <button class="reset-btn nav-tooltip" data-tip="Reiniciar" onclick="resetFilters()">✕ Reset</button>
+</div>
+
+</div>
+
+</div>
+  <div class="cards-row" id="cards-writing">
+
+    <a href="https://laalianzanoticias.com/2026/04/13/precio-de-gasolina-asfixia-a-trabajadoras-de-limpieza-siento-que-ya-no-es-negocio/" target="_blank" style="text-decoration:none;" data-medio="laalianza" data-idioma="es" data-tema="immigration" data-year="2026">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">La Alianza</span>
+          <img src="images/laalianza2.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Precio de gasolina asfixia a trabajadoras de limpieza: "Siento que ya no es negocio"</p>
+          <p class="card-desc">El alza del precio de la gasolina está reduciendo los ingresos de trabajadoras de limpieza en EE.UU.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://documentedny.com/2026/04/13/harlem-volunteers-educate-businesses-immigrant-rights/" target="_blank" style="text-decoration:none;" data-medio="documented" data-idioma="en" data-tema="immigration" data-year="2026">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Documented NY</span>
+          <img src="images/documented1.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">In Harlem, Know-Your-Rights Volunteers Go Door to Door Before ICE Comes Knocking</p>
+          <p class="card-desc">Indivisible Harlem volunteers are helping educate local businesses on how to respond if ICE agents arrive.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://laalianzanoticias.com/2026/04/02/que-derechos-tiene-si-ice-llega-a-su-trabajo-expertos-explican-que-deben-saber-trabajadoras-del-hogar-y-sus-empleadores/" target="_blank" style="text-decoration:none;" data-medio="laalianza" data-idioma="es" data-tema="immigration" data-year="2026">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">La Alianza</span>
+          <img src="images/laalianza3.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Qué Derechos tiene si ICE llega a su trabajo: expertos explican qué deben saber trabajadoras del hogar</p>
+          <p class="card-desc">Ante reportes de operativos migratorios puerta a puerta, crece la incertidumbre entre trabajadoras del hogar.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://documentedny.com/2026/03/13/upcycling-fashion-week-lgbtq-support/" target="_blank" style="text-decoration:none;" data-medio="documented" data-idioma="en" data-tema="culture" data-year="2026">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Documented NY</span>
+          <img src="images/documented3.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Peruvian Designer Reclaims the Runway for Trans Migrants</p>
+          <p class="card-desc">Peruvian fashion designer Yoella Cubas uses her upcycled designs to celebrate identity and environmental sustainability.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://laalianzanoticias.com/2026/04/01/a-pesar-de-la-alta-demanda-de-cuidadoras-en-el-hogar-multiples-obstaculos-impiden-a-mujeres-inmigrantes-acceder-a-estos-empleos/" target="_blank" style="text-decoration:none;" data-medio="laalianza" data-idioma="es" data-tema="labor" data-year="2026">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">La Alianza</span>
+          <img src="images/laalianza4.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">A pesar de la alta demanda de cuidadoras, múltiples obstáculos impiden a mujeres inmigrantes acceder a estos empleos</p>
+          <p class="card-desc">Aunque hay alta demanda de cuidadoras en Nueva York, mujeres solicitantes de asilo enfrentan barreras para acceder a empleos estables.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://documentedny.com/2026/01/05/i-wanted-him-gone-but-not-like-this-venezuelans-in-new-york-react-to-maduros-capture/" target="_blank" style="text-decoration:none;" data-medio="documented" data-idioma="en" data-tema="immigration" data-year="2026">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Documented NY</span>
+          <img src="images/documented2.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">'I Wanted Him Gone – But Not Like This': Venezuelans in New York React to Maduro's Capture</p>
+          <p class="card-desc">Joy, relief, fear, and doubt ripple through New York's Venezuelan community.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://laalianzanoticias.com/2026/03/13/guia-practica-para-obtener-consultas-gratis-con-abogados-de-inmigracion-en-nueva-york/" target="_blank" style="text-decoration:none;" data-medio="laalianza" data-idioma="es" data-tema="immigration" data-year="2026">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">La Alianza</span>
+          <img src="images/laalianza1.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Guía práctica para obtener consultas gratis con abogados de inmigración en Nueva York</p>
+          <p class="card-desc">El aumento de cambios en políticas federales ha hecho que más inmigrantes busquen asesoría legal en Nueva York.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://documentedny.com/2025/12/29/asylum-seekers-court-representation-crisis/"target="_blank" style="text-decoration:none;" data-medio="documented" data-idioma="en" data-tema="immigration" data-year="2025">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Documented NY</span>
+          <img src="images/documented4.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Asylum Seekers Navigate Immigration Courts Alone as Promised Legal Aid Falls Short</p>
+          <p class="card-desc">In New York City, migrants and asylum seekers risk deportation as they struggle to find representation in an overwhelmed legal-aid system.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://gothamist.com/news/queens-da-man-stabbed-on-e-train-after-scolding-rider-over-loud-phone-call"target="_blank" style="text-decoration:none;" data-medio="gothamist" data-idioma="en" data-tema="crime" data-year="2025">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Gothamist/WNYC Radio</span>
+          <img src="images/gothamist1.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Queens DA: Man stabbed on E train after scolding rider over loud phone call</p>
+          <p class="card-desc">A 50-year-old Brooklyn man has been charged with attempted murder over the altercation.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://gothamist.com/news/help-with-ny-residents-energy-bills-finally-coming-in-december-after-shutdown-delays"target="_blank" style="text-decoration:none;" data-medio="gothamist" data-idioma="en" data-tema="ny" data-year="2025">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Gothamist/WNYC Radio</span>
+          <img src="images/gothamist2.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Help with NY residents' energy bills finally coming in December, after shutdown delays</p>
+          <p class="card-desc">Here's how you can get help avoiding a utility shutoff or getting your power back on.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://gothamist.com/news/a-last-ditch-move-in-nyc-council-to-ban-carriage-horses"target="_blank" style="text-decoration:none;" data-medio="gothamist" data-idioma="en" data-tema="ny" data-year="2025">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Gothamist/WNYC Radio</span>
+          <img src="images/gothamist3.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">A last-ditch move in NYC Council to ban carriage horses fails</p>
+          <p class="card-desc">Councilmember Robert Holden was hoping to make carriage horses history in his final weeks in office.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://gothamist.com/news/holiday-open-street-returning-to-nycs-fifth-avenue-for-just-1-sunday"target="_blank" style="text-decoration:none;" data-medio="gothamist" data-idioma="en" data-tema="nyc" data-year="2025">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Gothamist/WNYC Radio</span>
+          <img src="images/gothamist4.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Holiday Open Street returning to NYC's Fifth Avenue for just 1 Sunday</p>
+          <p class="card-desc">The event was scaled back to a single weekend in 2024 and will repeat that schedule this year.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://gothamist.com/news/the-rockefeller-center-christmas-tree-will-be-set-up-saturday-how-to-see-it"target="_blank" style="text-decoration:none;" data-medio="gothamist" data-idioma="en" data-tema="nyc" data-year="2025">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Gothamist/WNYC Radio</span>
+          <img src="images/gothamist5.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">The Rockefeller Center Christmas tree will be set up Saturday: How to see it</p>
+          <p class="card-desc">The 75-feet-tall Norway Spruce is headed for NYC this week.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://gothamist.com/news/55000-runners-will-hit-streets-for-the-nyc-marathon-sunday-drivers-beware"target="_blank" style="text-decoration:none;" data-medio="gothamist" data-idioma="en" data-tema="nyc" data-year="2025">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Gothamist/WNYC Radio</span>
+          <img src="images/gothamist6.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">55,000 runners will hit streets for the NYC Marathon Sunday — drivers beware</p>
+          <p class="card-desc">The race wraps up at 10 p.m. Until then, the NYPD will be closing roads and bridges as needed.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://gothamist.com/arts-entertainment/nycs-village-halloween-parade-steps-off-friday-night-what-to-know"target="_blank" style="text-decoration:none;" data-medio="gothamist" data-idioma="en" data-tema="nyc" data-year="2025">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Gothamist/WNYC Radio</span>
+          <img src="images/gothamist7.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">NYC's Village Halloween Parade steps off Friday night: What to know</p>
+          <p class="card-desc">If you've got a costume, you've got a spot. But be ready for crowds.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://gothamist.com/news/paw-rade-perfection-the-tompkins-square-halloween-dog-parade-is-back-this-weekend"target="_blank" style="text-decoration:none;" data-medio="gothamist" data-idioma="en" data-tema="nyc" data-year="2025">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Gothamist/WNYC Radio</span>
+          <img src="images/gothamist8.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Paw-rade perfection: The Tompkins Square Halloween Dog Parade is back this weekend</p>
+          <p class="card-desc">Now in its 35th year, the costumed canine celebration in the East Village features adoptable dogs, treats and a fierce costume competition.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://gothamist.com/news/paw-rade-perfection-the-tompkins-square-halloween-dog-parade-is-back-this-weekend"target="_blank" style="text-decoration:none;" data-medio="gothamist" data-idioma="en" data-tema="nyc" data-year="2025">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Gothamist/WNYC Radio</span>
+          <img src="images/gothamist9.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Migrants staying at Row Hotel shelter in Midtown begin receiving notices to relocate</p>
+          <p class="card-desc">The makeshift housing became an early flashpoint in the migrant crisis that started three years ago.</p>
+        </div>
+      </div>
+    </a>
+
+     <a href="https://www.azcentral.com/story/news/politics/immigration/2025/08/14/mass-deportations-distrupt-arizona-daca-students/85552086007/"target="_blank" style="text-decoration:none;" data-medio="arizona" data-idioma="en" data-tema="immigration" data-year="2025">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">The Arizona Republic</span>
+          <img src="images/az5.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">DACA students in Arizona face college disruption amid Trump’s mass deportation push</p>
+          <p class="card-desc">Deferred action for Childhood Arrivals recipients talk to The Arizona Republic about their fears under the Trump administration.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://www.azcentral.com/story/noticias/2025/08/12/menores-migrantes-nuevas-tarifas-ley-grande-y-hermosa/85616314007/"target="_blank" style="text-decoration:none;" data-medio="arizona" data-idioma="es" data-tema="immigration" data-year="2025">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">The Arizona Republic</span>
+          <img src="images/az1.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Menores migrantes no acompañados enfrentan nuevas tarifas bajo la 'Ley Grande y Hermosa'</p>
+          <p class="card-desc">La ley incluye disposiciones para reforzar el Sistema de asilo estadounidense, lo que, según defensores, dificultará la solicitud de asilo.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://www.azcentral.com/story/news/politics/immigration/2025/08/05/unaccompanied-minor-migrants-face-new-fees-under-one-big-beautiful-bill/85347773007/"target="_blank" style="text-decoration:none;" data-medio="arizona" data-idioma="en" data-tema="immigration" data-year="2025">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">The Arizona Republic</span>
+          <img src="images/az1.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">New fees in One Big Beautiful Bill to have big impact on unaccompanied migrant minors</p>
+          <p class="card-desc">The law includes provisions to tighten the U.S. asylum system, which advocates say will make it more difficult for people fleeing persecution.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://www.azcentral.com/story/news/politics/immigration/2025/07/27/funding-cut-legal-representation-unaccompanied-minors-immigration-court/84493837007/"target="_blank" style="text-decoration:none;" data-medio="arizona" data-idioma="en" data-tema="immigration" data-year="2025">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">The Arizona Republic</span>
+          <img src="images/az3.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Unaccompanied migrant minors in AZ face court alone with legal funds in doubt</p>
+          <p class="card-desc">Many migrants minors are without legal representation in Arizona immigration courts, after federal funding was cut by Trump administration.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://www.azcentral.com/story/news/politics/immigration/2025/07/21/unaccompanied-migrant-minors-face-growing-hurdles-in-trump-era/85199836007/"target="_blank" style="text-decoration:none;" data-medio="arizona" data-idioma="en" data-tema="immigration" data-year="2025">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">The Arizona Republic</span>
+          <img src="images/az4.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Unaccompanied migrant minors face growing hurdles from Trump administration crackdown</p>
+          <p class="card-desc">Immigrant children who crossed the border withour parent or guardian are increasingly in the crosshairs of the Trump administration.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://www.azcentral.com/story/news/politics/border-issues/2025/07/12/migrant-deaths-plummet-arizona/84293328007/"target="_blank" style="text-decoration:none;" data-medio="arizona" data-idioma="en" data-tema="immigration" data-year="2025">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">The Arizona Republic</span>
+          <img src="images/az6.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Migrant deaths have plummeted in Arizona, once one of the deadliest routes into US</p>
+          <p class="card-desc">The decrease in migrant deaths corresponds to a huge drop in illegal border crossings after the Trump administration shut down asylum at the border.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://www.azcentral.com/story/noticias/2025/06/29/3-de-cada-10-familias-latinas-apoyan-deportaciones-de-trump-encuesta/84393772007/"target="_blank" style="text-decoration:none;" data-medio="arizona" data-idioma="es" data-tema="immigration" data-year="2025">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">The Arizona Republic</span>
+          <img src="images/az7.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Encuesta: ¿Cuántas familias latinas apoyan deportaciones masivas de Trump?</p>
+          <p class="card-desc">Nueva encuesta preguntó a latinos en Arizona y EE.UU. su opinión de las deportaciones masivas de inmigrantes por parte de Trump y temas relacionados.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://www.azcentral.com/story/news/politics/immigration/2025/06/23/bsp-research-poll-latino-families-trump-mass-deportations/84268753007/"target="_blank" style="text-decoration:none;" data-medio="arizona" data-idioma="en" data-tema="immigration" data-year="2025">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">The Arizona Republic</span>
+          <img src="images/az7.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">How many Latino families support Trump's mass deportations? What a new poll says</p>
+          <p class="card-desc">A new poll asked Latinos in Arizona and around the United States about their views on Trumps' mass deportations of immigrants and related issues.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://www.azcentral.com/story/noticias/2025/06/20/arrestos-inmigrantes-ice-en-arizona-que-saber/84278309007/"target="_blank" style="text-decoration:none;" data-medio="arizona" data-idioma="es" data-tema="immigration" data-year="2025">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">The Arizona Republic</span>
+          <img src="images/az8.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Esto es lo que debe saber sobre los arrestos de inmigrantes por parte del ICE en Arizona</p>
+          <p class="card-desc">El Servicio de Inmigración y Control de Aduanas de EE.UU. está utilizando diferentes tácticas para arrestar personas en Arizona. Lo que debe saber.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://www.azcentral.com/story/news/politics/immigration/2025/06/16/ice-immigrant-arrests-in-arizona-heres-what-to-know/84176617007/"target="_blank" style="text-decoration:none;" data-medio="arizona" data-idioma="en" data-tema="immigration" data-year="2025">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">The Arizona Republic</span>
+          <img src="images/az8.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Here's what to know about ICE immigrant arrests in Arizona</p>
+          <p class="card-desc">U.S. Immigration and Customs Enforcement is using different tactics to arrest people in Arizona. Here's what you need to know.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://www.azcentral.com/story/news/politics/immigration/2025/06/16/ice-immigrant-arrests-in-arizona-heres-what-to-know/84176617007/"target="_blank" style="text-decoration:none;" data-medio="arizona" data-idioma="es" data-tema="immigration" data-year="2025">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">The Arizona Republic</span>
+          <img src="images/az9.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Cónsul de México en Phoenix pide a mexicanos no acudir a protestas el 14 de junio</p>
+          <p class="card-desc">Cónsul de México en Phoenix pide que mexicanos indocumentados no vayan a protestas contra redadas anti-inmigración.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://www.azcentral.com/story/news/politics/immigration/2025/06/13/mexican-consul-tells-mexican-nationals-to-avoid-no-kings-protests/84194079007/"target="_blank" style="text-decoration:none;" data-medio="arizona" data-idioma="en" data-tema="immigration" data-year="2025">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">The Arizona Republic</span>
+          <img src="images/az9.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Mexican consul in Phoenix urges Mexican nationals to avoid 'No Kings' protests</p>
+          <p class="card-desc">Despite organizers saying the Arizona protests will be peaceful, the consul warned against participation, especially for those without legal status.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://english.elpais.com/usa/2025-06-26/unaccompanied-immigrant-minors-face-growing-hurdles-from-the-trump-administration-crackdown.html"target="_blank" style="text-decoration:none;" data-medio="elpaisus" data-idioma="en" data-tema="immigration" data-year="2025">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">El País US</span>
+          <img src="images/elpaisus1.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Unaccompanied immigrant minors face growing hurdles from the Trump administration crackdown</p>
+          <p class="card-desc">Many children are having to defend their cases alone before immigration judges, without lawyers, while the government has made it harder for them to leave the shelter system and reunite with their families</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://elpais.com/us/migracion/2025-06-26/los-menores-inmigrantes-no-acompanados-se-enfrentan-a-crecientes-obstaculos-por-la-mano-dura-de-la-administracion-trump.html"target="_blank" style="text-decoration:none;" data-medio="elpaisus" data-idioma="es" data-tema="immigration" data-year="2025">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">El País US</span>
+          <img src="images/elpaisus1.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Los menores inmigrantes no acompañados se enfrentan a crecientes obstáculos por la mano dura de la Administración Trump</p>
+          <p class="card-desc">Muchos niños defienden sus casos solos frente a jueces de inmigración, sin abogados, mientras que el Gobierno ha endurecido los procesos para dejarles salir del sistema de acogida y reunirse con sus familias</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://www.palabranahj.org/archive/alone-in-court-the-us-governments-crackdown-on-unaccompanied-migrant-kids"target="_blank" style="text-decoration:none;" data-medio="palabra" data-idioma="en" data-tema="immigration" data-year="2025">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Palabra NAHJ</span>
+          <img src="images/palabranahj.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Alone in Court: The U.S. Government’s Crackdown on Unaccompanied Migrant Kids</p>
+          <p class="card-desc">Funding cuts, raids, and Kafkaesque courtrooms leave thousands of children defenseless. Advocates say it’s by design.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://elpais.com/us/2024-12-25/los-migrantes-dedicados-a-la-venta-ambulante-en-nueva-york-acorralados-entre-el-alcalde-adams-y-trump.html"target="_blank" style="text-decoration:none;" data-medio="elpaisus" data-idioma="es" data-tema="immigration" data-year="2024">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">El País US</span>
+          <img src="images/elpaisus2.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Los migrantes dedicados a la venta ambulante en Nueva York, acorralados entre el alcalde Adams y Trump</p>
+          <p class="card-desc">Más de la mitad de los neoyorquinos votaron a favor de que se refuerce la fiscalización de vendedores ambulantes sin licencias, permisos que el municipio no concede desde 2016.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://english.elpais.com/usa/2025-06-14/thousands-of-migrant-mothers-face-closure-of-new-yorks-shelter-hotels-how-much-will-it-cost-to-rent-a-small-place.html"target="_blank" style="text-decoration:none;" data-medio="elpaisus" data-idioma="en" data-tema="immigration" data-year="2025">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">El País US</span>
+          <img src="images/elpaisus3.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Thousands of migrant mothers face closure of New York’s shelter hotels: ‘How much will it cost to rent a small place?’</p>
+          <p class="card-desc">Without the possibility of obtaining a work permit and fearing deportation, 35,000 families with children still live in the city’s shelters</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://elpais.com/us/migracion/2025-06-05/miles-de-madres-migrantes-se-enfrentan-al-cierre-de-los-hoteles-refugio-de-nueva-york-cuanto-costara-alquilar-una-casita.html"target="_blank" style="text-decoration:none;" data-medio="elpaisus" data-idioma="es" data-tema="immigration" data-year="2025">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">El País US</span>
+          <img src="images/elpaisus3.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Miles de madres migrantes se enfrentan al cierre de los hoteles refugio de Nueva York: “¿Cuánto costará alquilar una casita?"</p>
+          <p class="card-desc">Sin posibilidad de conseguir un permiso de trabajo y con miedo a la deportación, 35.000 familias con niños aún viven en los albergues de la ciudad</p>
+        </div>
+      </div>
+    </a>
+
+     <a href="https://elpais.com/america-futura/2025-05-12/lorena-kourousias-la-psicologa-que-busca-sanar-el-trauma-de-la-migracion-en-madres-latinas.html"target="_blank" style="text-decoration:none;" data-medio="elpaisamerica" data-idioma="es" data-tema="immigration" data-year="2024">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">El País América</span>
+          <img src="images/elpaisamerica1.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Lorena Kourousias, la psicóloga que busca sanar el trauma de la migración en madres latinas</p>
+          <p class="card-desc">La mexicana dirige Mixteca, una organización que ofrece sesiones de terapia grupal alternativa en Nueva York para sobrevivientes de violencia</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://marcha.org.ar/peru-el-lento-camino-hacia-la-justicia-para-las-victimas-del-regimen-de-dina-boluarte/"target="_blank" style="text-decoration:none;" data-medio="marcha" data-idioma="es" data-tema="immigration" data-year="2023">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Marcha.org</span>
+          <img src="images/marcha1.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Perú: El lento camino hacia la justicia para las víctimas del régimen de Dina Boluarte</p>
+          <p class="card-desc">En julio se reanudaron las protestas que exigen la renuncia de la presidenta del Perú. Durante estas manifestaciones se reportaron más personas heridas, que se suman a las miles contabilizadas entre diciembre de 2022 y marzo de 2023. El camino legal que se sigue para obtener justicia inició de forma improvisada y aún no se evidencian resultados.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://www.infobae.com/america/peru/2022/12/20/investigacion-de-muertes-de-manifestantes-en-el-fuero-militar-es-irregular/"target="_blank" style="text-decoration:none;" data-medio="infobae" data-idioma="es" data-tema="protests" data-year="2022">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Infobae Perú</span>
+          <img src="images/infobae1.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Investigación de muertes de manifestantes en el fuero militar es irregular</p>
+          <p class="card-desc">A pesar de que contradice sentencias del Tribunal Constitucional y Corte Interamericana de Derechos Humanos, presidenta Dina Boluarte anunció que la justicia militar investigará la muerte de 22 personas durante las protestas contra su gobierno</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://www.infobae.com/america/peru/2022/11/06/congreso-insiste-en-aprobar-ley-que-discrimina-a-personas-migrantes/"target="_blank" style="text-decoration:none;" data-medio="infobae" data-idioma="es" data-tema="immigration" data-year="2022">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Infobae Perú</span>
+          <img src="images/infobae2.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Congreso insiste en aprobar ley que discrimina a personas migrantes</p>
+          <p class="card-desc">Buscan que arrendadores, antes de alquilar viviendas, exijan a extranjeros documentos que prueben que su situación migratoria es regular.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://www.infobae.com/america/peru/2022/10/26/poder-ejecutivo-no-informa-desde-hace-cinco-anos-como-enfrenta-la-trata-de-personas/"target="_blank" style="text-decoration:none;" data-medio="infobae" data-idioma="es" data-tema="humantraf" data-year="2022">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Infobae Perú</span>
+          <img src="images/infobae3.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Poder Ejecutivo no informa desde hace cinco años cómo enfrenta la trata de personas</p>
+          <p class="card-desc">Ley los obliga a rendir cuentas cada año sobre sus avances en la lucha contra la trata de personas. Pero los últimos 17 ministros del Interior incumplieron con esta norma.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://www.infobae.com/america/peru/2022/12/05/condenados-por-terrorismo-rehabilitados-podran-postular-a-cargos-publicos/"target="_blank" style="text-decoration:none;" data-medio="infobae" data-idioma="es" data-tema="humanrights" data-year="2022">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Infobae Perú</span>
+          <img src="images/infobae4.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Condenados por terrorismo rehabilitados podrán postular a cargos públicos</p>
+          <p class="card-desc">Tribunal Constitucional sentenció que se vulneraron derechos cuando el Congreso decidió que no pueden participar en elecciones los condenados por terrorismo rehabilitados.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://www.infobae.com/america/peru/2022/10/31/las-barreras-que-impiden-acelerar-la-busqueda-de-ninas-y-mujeres-desaparecidas/"target="_blank" style="text-decoration:none;" data-medio="infobae" data-idioma="es" data-tema="humanrights" data-year="2022">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Infobae Perú</span>
+          <img src="images/infobae5.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Las barreras que impiden acelerar la búsqueda de niñas y mujeres desaparecidas</p>
+          <p class="card-desc">Policías incumplen el protocolo para buscar a niñas y mujeres desaparecidas. No emiten rápidamente la nota de alerta. La norma deja en sus manos la activación de la Alerta de Emergencia, que moviliza a varias entidades para buscar a mujeres que sufrieron violencia antes de desaparecer.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://www.infobae.com/america/peru/2022/11/10/congreso-insiste-en-aprobar-ley-que-fomenta-deforestacion-en-la-amazonia/"target="_blank" style="text-decoration:none;" data-medio="infobae" data-idioma="es" data-tema="environment" data-year="2022">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Infobae Perú</span>
+          <img src="images/infobae6.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Congreso insiste en aprobar ley que fomenta deforestación en la Amazonía</p>
+          <p class="card-desc">El Poder Ejecutivo observó la propuesta porque busca que personas y empresas con tierras en la Amazonía realicen actividades agropecuarias sobre ellas, a pesar de que se trate de tierras forestales o de protección, necesarias para salvaguardar la biodiversidad y frenar los efectos del cambio climático. Sin embargo, la Comisión Agraria volvió a votar a favor del proyecto de ley del Bloque Magisterial.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://www.infobae.com/america/peru/2022/09/30/peru-no-podra-expulsar-a-personas-migrantes-que-peligran-en-su-pais-de-origen/"target="_blank" style="text-decoration:none;" data-medio="infobae" data-idioma="es" data-tema="immigration" data-year="2022">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Infobae Perú</span>
+          <img src="images/infobae7.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Perú no podrá expulsar a personas migrantes que peligran en su país de origen</p>
+          <p class="card-desc">Tribunal Constitucional también sentenció que no se pida visa a las personas migrantes en situación de riesgo que quieran ingresar al Perú.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://www.infobae.com/america/peru/2022/11/30/poder-judicial-ordena-al-ministerio-de-justicia-que-repare-a-victimas-de-esterilizaciones-forzadas/"target="_blank" style="text-decoration:none;" data-medio="infobae" data-idioma="es" data-tema="genderviolence" data-year="2022">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Infobae Perú</span>
+          <img src="images/infobae8.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Poder Judicial ordena al Ministerio de Justicia que repare a víctimas de esterilizaciones forzadas</p>
+          <p class="card-desc">La cartera ministerial puede apelar el mandato. Representantes legales de las víctimas buscarán llegar a un acuerdo para que se cumpla la reparación integral</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://www.infobae.com/america/peru/2022/10/21/nino-queda-desprotegido-porque-jueces-niegan-inscripcion-de-sus-mamas-en-dni/"target="_blank" style="text-decoration:none;" data-medio="infobae" data-idioma="es" data-tema="lgbt" data-year="2022">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Infobae Perú</span>
+          <img src="images/infobae9.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Niño queda desprotegido porque jueces niegan inscripción de sus mamás en DNI</p>
+          <p class="card-desc">El Poder Judicial dio la espalda a Dakarai, niño de 8 años, al decidir que en su Documento Nacional de Identidad (DNI) no figure el nombre de sus dos mamás. Así, impiden que acceda a varios de sus derechos humanos.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://www.infobae.com/america/peru/2022/09/20/elecciones-2022-19-candidatos-investigados-por-presunta-entrega-de-dadivas/"target="_blank" style="text-decoration:none;" data-medio="infobae" data-idioma="es" data-tema="elections" data-year="2022">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Infobae Perú</span>
+          <img src="images/infobae11.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Elecciones 2022: 19 candidatos investigados por presunta entrega de dádivas</p>
+          <p class="card-desc">Jurados Electorales Especiales sancionaron a 4 aspirantes que ofrecieron desde polos deportivos hasta dinero en efectivo para obtener votos.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://www.infobae.com/america/peru/2022/10/10/rafael-lopez-aliaga-peligran-ordenanzas-a-favor-de-personas-lgtbiq-por-eleccion-de-alcalde-de-lima/"target="_blank" style="text-decoration:none;" data-medio="infobae" data-idioma="es" data-tema="lgbt" data-year="2022">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Infobae Perú</span>
+          <img src="images/infobae10.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Peligran ordenanzas a favor de personas LGTBIQ+ por elección de virtual alcalde de Lima, Rafael López Aliaga</p>
+          <p class="card-desc">Dieciocho mujeres trans que laboran en la Municipalidad de Lima se quedarían sin trabajo. Podrían modificar al menos 5 ordenanzas que protegen a mujeres y personas LGTBIQ+.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://www.infobae.com/america/peru/2022/10/13/uni-vuelven-a-contratar-a-profesor-investigado-por-hostigamiento-sexual-hacia-alumna/"target="_blank" style="text-decoration:none;" data-medio="infobae" data-idioma="es" data-tema="genderviolence" data-year="2022">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Infobae Perú</span>
+          <img src="images/infobae12.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">UNI: vuelven a contratar a profesor investigado por hostigamiento sexual hacia alumna</p>
+          <p class="card-desc">Superintendencia Nacional de Educación Superior Universitaria (Sunedu) lo investiga porque habría tocado a estudiante. Rector de la Universidad Nacional de Ingeniería (UNI) se comprometió a prevenir estos casos, pero aceptó contratación de profesor denunciado.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://www.infobae.com/america/peru/2022/10/19/elecciones-2022-40-candidatos-sentenciados-por-violencia-familiar-obtienen-mayor-cantidad-de-votos/"target="_blank" style="text-decoration:none;" data-medio="infobae" data-idioma="es" data-tema="elections" data-year="2022">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Infobae Perú</span>
+          <img src="images/infobae13.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Elecciones 2022: 40 candidatos sentenciados por violencia familiar obtienen mayor cantidad de votos</p>
+          <p class="card-desc">Son virtuales alcaldes y regidores a pesar de que los sentenciaron por violencia física y psicológica. Ancash es la región donde eligieron a mayor cantidad de sentenciados por agresiones contra mujeres e hijos.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://www.infobae.com/america/peru/2022/09/16/pronabec-redujo-mas-de-s-76-millones-en-presupuesto-para-dar-beca-18/"target="_blank" style="text-decoration:none;" data-medio="infobae" data-idioma="es" data-tema="education" data-year="2022">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Infobae Perú</span>
+          <img src="images/infobae14.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Pronabec redujo más de S/ 76 millones en presupuesto para dar Beca 18</p>
+          <p class="card-desc">Debido a un menor presupuesto, se podrían ver perjudicados hasta 400 mil jóvenes de pobreza y pobreza extrema que postulan a este programa.</p>
+        </div>
+      </div>
+    </a>
+
+     <a href="https://www.infobae.com/america/peru/2022/10/25/pedro-castillo-y-keiko-fujimori-no-reportaron-a-la-onpe-sus-gastos-en-publicidad-digital/"target="_blank" style="text-decoration:none;" data-medio="infobae" data-idioma="es" data-tema="elections" data-year="2022">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Infobae Perú</span>
+          <img src="images/infobae15.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Pedro Castillo y Keiko Fujimori no reportaron a la ONPE sus gastos en publicidad digital</p>
+          <p class="card-desc">Incongruencia. Gastaron al menos USD 16 mil en publicidad para Facebook, pero informaron a la Oficina Nacional de Procesos Electorales (ONPE) que sus gastos fueron de S/0, según informe de Hiperderecho.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://www.infobae.com/america/peru/2022/09/27/elecciones-2022-empresas-de-candidatos-a-alcaldias-de-lima-deben-a-sunat-mas-de-s3-millones/"target="_blank" style="text-decoration:none;" data-medio="infobae" data-idioma="es" data-tema="elections" data-year="2022">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Infobae Perú</span>
+          <img src="images/infobae16.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Elecciones 2022: Empresas de candidatos a alcaldías de Lima deben a Sunat más de S/3 millones</p>
+          <p class="card-desc">Las empresas que más deben al Estado pertenecen a los candidatos de Avanza País, Podemos Perú y Alianza para el Progreso.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://wayka.pe/mujer-migrante-lleva-35-anos-sin-identidad-ni-acceso-a-servicios-de-salud/"target="_blank" style="text-decoration:none;" data-medio="wayka" data-idioma="es" data-tema="immigration" data-year="2022">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Wayka</span>
+          <img src="images/wayka1.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Mujer migrante lleva 35 años sin identidad ni acceso a servicios de salud</p>
+          <p class="card-desc">María de los Ángeles Campos pasó 35 años sin atención en salud desde que llegó al Perú. Hoy busca nacionalizarse para recibir tratamiento médico por la fibrosis pulmonar que padece. Pero Migraciones le coloca limitaciones. Al igual que ella, otras mujeres migrantes tienen restringido acceso a servicios de salud periódicos, alerta Defensoría del Pueblo.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://wayka.pe/migraciones-entrego-a-mujer-migrante-carne-de-residencia-pero-vence-en-6-meses/"target="_blank" style="text-decoration:none;" data-medio="wayka" data-idioma="es" data-tema="immigration" data-year="2022">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Wayka</span>
+          <img src="images/wayka2.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Migraciones entregó a mujer migrante carné de residencia pero vence en 6 meses</p>
+          <p class="card-desc">María de los Ángeles Campos podrá acceder a servicios de salud para atender 5 enfermedades solo hasta setiembre de este año. Luego, volverá a enfrentarse a limitaciones de Migraciones para renovar su calidad migratoria.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://wayka.pe/keiko-fujimori-declaro-ingresos-por-mas-de-s-220-mil-mientras-estuvo-presa/"target="_blank" style="text-decoration:none;" data-medio="wayka" data-idioma="es" data-tema="elections" data-year="2021">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Wayka</span>
+          <img src="images/wayka3.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Keiko Fujimori declaró ingresos por más de S/ 220 mil mientras estuvo presa</p>
+          <p class="card-desc">¿Cómo lo hace? Durante el 2019, mientras cumplía prisión preventiva, habría ganado S/18,500 cada mes, según lo que declaró en su hoja de vida.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://wayka.pe/tres-rostros-que-retratan-los-mas-de-231-mil-casos-de-violencia-contra-la-mujer-en-pandemia/"target="_blank" style="text-decoration:none;" data-medio="wayka" data-idioma="es" data-tema="genderviolence" data-year="2021">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Wayka</span>
+          <img src="images/wayka4.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Tres rostros que retratan los más de 231 mil casos de violencia contra la mujer en pandemia</p>
+          <p class="card-desc">Entre 2020 y octubre de 2021, los Centros de Emergencia Mujer atendieron 245 casos de feminicidio y 588 de intento de feminicidio. También registraron miles de denuncias por violencia psicológica, física y sexual. Sobrevivientes y familiares de una víctima de feminicidio esperan justicia.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://wayka.pe/los-pescadores-que-limpian-petroleo-del-mar-para-sobrevivir/"target="_blank" style="text-decoration:none;" data-medio="wayka" data-idioma="es" data-tema="environment" data-year="2022">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Wayka</span>
+          <img src="images/wayka5.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Los pescadores que limpian petróleo del mar para sobrevivir</p>
+          <p class="card-desc">1,200 pescadores de Ancón llevan seis días sin trabajar, desde que Repsol contaminó las aguas y perjudicó los ingresos con los que sostienen a sus familias. Han sido contratados para labores de limpieza del petróleo a cambio de S/ 350 y sin implementos de seguridad por una empresa tercerizada. Ellos exigen una remuneración de la multinacional y atención del Estado.</p>
+        </div>
+      </div>
+    </a>
+
+     <a href="https://wayka.pe/las-veces-que-susana-higuchi-narro-que-fue-torturada-durante-la-dictadura-de-fujimori/"target="_blank" style="text-decoration:none;" data-medio="wayka" data-idioma="es" data-tema="elections" data-year="2021">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Wayka</span>
+          <img src="images/wayka6.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Las veces que Susana Higuchi narró que fue torturada durante la dictadura de Fujimori</p>
+          <p class="card-desc">Keiko Fujimori llama “leyenda urbana” a las denuncias de maltrato que hizo su madre, pero fotografías corroboran que Higuchi sobrevivió a la violencia que ejerció su exesposo después del golpe de Estado de 1992.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://wayka.pe/caso-acoso-sexual-resolucion-fiscal-desmiente-version-de-lescano-sobre-mensajes-a-periodista/"target="_blank" style="text-decoration:none;" data-medio="wayka" data-idioma="es" data-tema="elections" data-year="2021">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Wayka</span>
+          <img src="images/wayka7.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Caso acoso sexual: Resolución fiscal desmiente versión de Lescano sobre mensajes a periodista</p>
+          <p class="card-desc">El candidato presidencial asegura que la Fiscalía archivó la denuncia en su contra porque se demostró que los chats “fueron photoshopeados”: sin embargo, el fiscal adjunto no concluye ello en la resolución que archiva el caso. Tampoco desmiente que Lescano envió los mensajes. En cambio, se basó en fundamentos machistas.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://wayka.pe/victimas-de-esterilizaciones-forzadas-advierten-que-cambio-de-fiscal-atrasa-alcance-de-sentencia/"target="_blank" style="text-decoration:none;" data-medio="wayka" data-idioma="es" data-tema="genderviolence" data-year="2021">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Wayka</span>
+          <img src="images/wayka8.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Víctimas de esterilizaciones forzadas advierten que cambio de fiscal atrasa alcance de sentencia</p>
+          <p class="card-desc">Fiscal Carmen Crisostomo estaba investigando más de 1250 denuncias desde 2017. Al removerla, ingresará un nuevo fiscal que desconoce los avances.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://wayka.pe/municipalidad-de-lima-lleva-89-dias-sin-atender-reclamos-de-sus-obreros/"target="_blank" style="text-decoration:none;" data-medio="wayka" data-idioma="es" data-tema="labor" data-year="2022">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Wayka</span>
+          <img src="images/wayka9.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Municipalidad de Lima lleva 89 días sin atender reclamos de sus obreros</p>
+          <p class="card-desc">500 trabajadores del municipio ganan S/ 4.50 por hora por lo que piden mejores condiciones laborales. Comuna limeña incumple Ley de negociación colectiva en el sector estatal al no reunirse con los obreros en el plazo establecido.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://wayka.pe/alberto-fujimori-declarara-sobre-asesinato-contra-periodista-melissa-alfaro/"target="_blank" style="text-decoration:none;" data-medio="wayka" data-idioma="es" data-tema="humanrights" data-year="2021">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Wayka</span>
+          <img src="images/wayka10.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Alberto Fujimori declarará sobre asesinato contra periodista Melissa Alfaro</p>
+          <p class="card-desc">El próximo 23 de junio, el dictador será interrogado por la Fiscalía en el marco de la investigación preliminar que le siguen por el presunto delito de homicidio calificado contra la periodista Melissa Alfaro.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://wayka.pe/mujer-migrante-no-obtiene-justicia-tras-7-anos-de-haber-denunciado-violencia/"target="_blank" style="text-decoration:none;" data-medio="wayka" data-idioma="es" data-tema="immigration" data-year="2022">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Wayka</span>
+          <img src="images/wayka11.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Mujer migrante no obtiene justicia tras 7 años de haber denunciado violencia</p>
+          <p class="card-desc">Desde que el Poder Judicial condenó al agresor Joe Lavado, este no paga la reparación civil a Katherine Osorio, migrante colombiana. Tampoco cumple la demanda de alimentos, pero busca impedir que entreguen la patria potestad del hijo de 10 años.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://wayka.pe/comision-del-congreso-impide-que-peru-se-sume-a-convencion-contra-intolerancia-y-racismo/"target="_blank" style="text-decoration:none;" data-medio="wayka" data-idioma="es" data-tema="humanrights" data-year="2021">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Wayka</span>
+          <img src="images/wayka12.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Comisión del Congreso impide que Perú se sume a convención contra intolerancia y racismo</p>
+          <p class="card-desc">Fujimorista Bustamante recomendó a la Comisión de Relaciones Exteriores votar en contra de aprobar dos convenciones a las que el Perú estuvo adscrito desde 2013. Se sumaron a opiniones de organizaciones religiosas.</p>
+        </div>
+      </div>
+    </a>
+
+     <a href="https://wayka.pe/caso-solsiret-policia-aun-no-detiene-a-condenados-brian-villanueva-y-yolanda-castillo/"target="_blank" style="text-decoration:none;" data-medio="wayka" data-idioma="es" data-tema="genderviolence" data-year="2022">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Wayka</span>
+          <img src="images/wayka13.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Caso Solsiret: Policía aún no detiene a condenados Brian Villanueva y Yolanda Castillo</p>
+          <p class="card-desc">Tienen orden de captura desde el 3 de junio, pero aún no los detienen. Fueron condenados por el delito de encubrimiento real del feminicidio cometido contra Solsiret Rodríguez.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://wayka.pe/congresista-de-peru-libre-se-opone-a-retirar-propuesta-que-cambia-el-nombre-del-ministerio-de-la-mujer/"target="_blank" style="text-decoration:none;" data-medio="wayka" data-idioma="es" data-tema="genderviolence" data-year="2022">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Wayka</span>
+          <img src="images/wayka14.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Congresista de Perú Libre se opone a retirar propuesta que cambia el nombre del Ministerio de la Mujer</p>
+          <p class="card-desc">Tras conversar con organizaciones defensoras de los derechos de las mujeres y personas LGTBIQ+, congresista Américo Gonza admitió que las mujeres sufren violencia, pero se negó a retirar su proyecto de ley de la agenda del Pleno.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://wayka.pe/reglamento-de-ley-sobre-cancer-infantil-ignora-observaciones-de-padres-de-pacientes/"target="_blank" style="text-decoration:none;" data-medio="wayka" data-idioma="es" data-tema="health" data-year="2021">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Wayka</span>
+          <img src="images/wayka15.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Reglamento de ley sobre cáncer infantil ignora observaciones de padres de pacientes</p>
+          <p class="card-desc">Ley promete subsidio económico a cada trabajador que sea familiar de un niño con cáncer. Pero reglamento no especifica que los beneficiarios podrán ser personas que laboran de manera informal o independiente. Los más perjudicados son los menores que viven en condición de pobreza.</p>
+        </div>
+      </div>
+    </a>
+
+       <a href="https://wayka.pe/51-congresistas-no-informaron-sus-actividades-en-semanas-de-representacion/"target="_blank" style="text-decoration:none;" data-medio="wayka" data-idioma="es" data-tema="peru" data-year="2021">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Wayka</span>
+          <img src="images/wayka16.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">51 congresistas no informaron sus actividades en semanas de representación</p>
+          <p class="card-desc">Estado les paga viajes y viáticos, pero parlamentarios no informan sus labores. Uno de ellos es el fujimorista Juan Lizarzaburu, quien presentó proyecto de ley para que le paguen viajes al extranjero durante labor de representación. Su iniciativa ya fue aprobada en dos comisiones.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://wayka.pe/virtuales-congresistas-de-keiko-gastaron-casi-medio-millon-de-soles-en-campanas/"target="_blank" style="text-decoration:none;" data-medio="wayka" data-idioma="es" data-tema="elections" data-year="2021">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Wayka</span>
+          <img src="images/wayka17.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Virtuales congresistas de Keiko gastaron casi medio millón de soles en campañas</p>
+          <p class="card-desc">Cinco parlamentarios aportaron más dinero del que ganaron, según sus hojas de vida. Otros cuatro aún no informan a la ONPE quiénes los financiaron durante Elecciones 2021.</p>
+        </div>
+      </div>
+    </a>
+
+     <a href="https://wayka.pe/fuerza-popular-reutilizo-vouchers-para-ingresar-30-pedidos-de-nulidad/"target="_blank" style="text-decoration:none;" data-medio="wayka" data-idioma="es" data-tema="elections" data-year="2021">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Wayka</span>
+          <img src="images/wayka18.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Fuerza Popular reutilizó vouchers para ingresar 30 pedidos de nulidad</p>
+          <p class="card-desc">No pagaron derecho a trámite. Tras verificar en página de Jurado Nacional de Elecciones, detectamos que personera legal solicitó nulidad de actas con comprobantes de pago que ya había presentado.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://wayka.pe/proponen-que-lider-de-con-mis-hijos-no-te-metas-presida-comision-de-educacion/"target="_blank" style="text-decoration:none;" data-medio="wayka" data-idioma="es" data-tema="education" data-year="2021">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Wayka</span>
+          <img src="images/wayka19.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Proponen que líder de Con Mis Hijos No Te Metas presida Comisión de Educación</p>
+          <p class="card-desc">También conformarían la comisión otros cinco congresistas de Renovación Popular, que no tienen experiencia en educación.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://wayka.pe/empresarios-q-marchan-por-la-vacancia-deben-mas-de-s-22-millones-al-pais/"target="_blank" style="text-decoration:none;" data-medio="wayka" data-idioma="es" data-tema="elections" data-year="2022">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Wayka</span>
+          <img src="images/wayka20.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Empresarios que marchan por la vacancia deben más de S/ 22 millones al país</p>
+          <p class="card-desc">Dicen que buscan el ‘desarrollo’ del Perú, pero empresas de Erasmo Wong y Jorge Lazarte no cumplen con pagar deudas al Estado. Agroexportadora de Cristóbal Cillóniz afronta procesos sancionadores por no garantizar espacios seguros para sus trabajadores.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://wayka.pe/castillo-no-anuncio-si-observara-proyectos-de-ley-que-ponen-en-riesgo-derechos-de-mujeres/"target="_blank" style="text-decoration:none;" data-medio="wayka" data-idioma="es" data-tema="elections" data-year="2021">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Wayka</span>
+          <img src="images/wayka21.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Castillo no anunció si observará proyectos de ley que ponen en riesgo derechos de mujeres</p>
+          <p class="card-desc">Son cinco proyectos de ley que congresistas ultraconservadores buscan aprobar, pese a que afectarían a niñas, adolescentes y mujeres. Antes, el mandatario no observó la ley que busca prevenir violencia hacia las mujeres desde las escuelas.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://wayka.pe/lopez-aliaga-lleva-al-congreso-a-candidato-denunciado-por-violencia-fisica-y-familiar/"target="_blank" style="text-decoration:none;" data-medio="wayka" data-idioma="es" data-tema="elections" data-year="2021">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Wayka</span>
+          <img src="images/wayka22.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">López Aliaga lleva al Congreso a candidato denunciado por violencia física y familiar</p>
+          <p class="card-desc">Su esposa, también candidata de Renovación Popular, lo acusó por violencia psicológica en 2019. Su expareja lo denunció por violencia física en 2013. Otros candidatos del mismo partido fueron investigados por maltrato físico, peculado, lesiones graves y hurto simple.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://wayka.pe/lopez-aliaga-otorgo-poderes-a-candidatos-denunciados-por-violencia-familiar/"target="_blank" style="text-decoration:none;" data-medio="wayka" data-idioma="es" data-tema="elections" data-year="2021">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Wayka</span>
+          <img src="images/wayka23.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">López Aliaga otorgó poderes a candidatos denunciados por violencia familiar</p>
+          <p class="card-desc">En una muestra de cercanía y confianza, el candidato presidencial de Renovación Popular otorgó facultades a los esposos y abogados Yorry Warthon y Katty Cachay para que su representación efectúan trámites legales, entre otros de reconocimiento de paternidad extramatrimonial.</p>
+        </div>
+      </div>
+    </a>
+
+     <a href="https://wayka.pe/repsol-no-pagaria-indemnizacion-a-pescadores-de-ancon-hasta-que-estado-mida-impacto-ambiental/"target="_blank" style="text-decoration:none;" data-medio="wayka" data-idioma="es" data-tema="environment" data-year="2021">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Wayka</span>
+          <img src="images/wayka24.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Repsol no pagaría indemnización a pescadores de Ancón hasta que Estado mida impacto ambiental</p>
+          <p class="card-desc">En reunión, administradores de Refinería La Pampilla S.A.A. respondieron a los pescadores de Ancón que no cumplirán con indemnización económica hasta que el Estado no emita un informe que indique el impacto ambiental del petróleo en las playas.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://wayka.pe/16-candidatos-de-fp-denunciados-por-corrupcion-violencia-contra-la-mujer-y-otros-delitos/"target="_blank" style="text-decoration:none;" data-medio="wayka" data-idioma="es" data-tema="elections" data-year="2021">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Wayka</span>
+          <img src="images/wayka25.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">16 candidatos de FP denunciados por corrupción, violencia contra la mujer y otros delitos</p>
+          <p class="card-desc">Keiko Fujimori también lleva en su lista al Congreso a aspirantes que fueron acusados en distintas fiscalías por delitos como homicidio y tráfico ilícito de drogas.</p>
+        </div>
+      </div>
+    </a>
+
+     <a href="https://wayka.pe/solo-el-1-de-leyes-aprobadas-por-el-congreso-en-ultimo-quinquenio-buscan-igualdad-de-genero/"target="_blank" style="text-decoration:none;" data-medio="wayka" data-idioma="es" data-tema="peru" data-year="2021">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Wayka</span>
+          <img src="images/wayka27.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Solo el 1% de leyes aprobadas por el Congreso en último quinquenio buscan igualdad de género</p>
+          <p class="card-desc">Cuando hubo mayoría fujimorista, parlamentarios dieron luz verde solo a tres proyectos de ley sobre igualdad de oportunidades para mujeres y hombres.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://wayka.pe/municipio-de-comas-presenta-controversial-proyecto-de-ley-para-que-serenos-usen-armas-no-letales/"target="_blank" style="text-decoration:none;" data-medio="wayka" data-idioma="es" data-tema="crime" data-year="2021">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Wayka</span>
+          <img src="images/wayka28.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Municipio de Comas presenta controversial proyecto de ley para que serenos usen armas no letales</p>
+          <p class="card-desc">Pese a que su labor solo consiste en patrullar, municipalidad busca que serenos usen balas de goma y gas pimienta, lo que puede causar abuso de autoridad si no aplican capacitación adecuada, advierte Coordinadora Nacional de Derechos Humanos.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://wayka.pe/congresistas-siguen-cometiendo-irregularidades-en-proceso-para-elegir-a-defensor-del-pueblo/"target="_blank" style="text-decoration:none;" data-medio="wayka" data-idioma="es" data-tema="peru" data-year="2022">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Wayka</span>
+          <img src="images/wayka29.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Congresistas siguen cometiendo irregularidades en proceso para elegir a Defensor del Pueblo</p>
+          <p class="card-desc">No quieren que ciudadanos tachen a los aspirantes a Defensor del Pueblo con cuestionamientos. Proceso suele tardar 6 meses, pero este Congreso lo hará en un mes.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://wayka.pe/caso-solsiret-hallan-escondidos-a-condenados-brian-villanueva-y-yolanda-castillo/"target="_blank" style="text-decoration:none;" data-medio="wayka" data-idioma="es" data-tema="genderviolence" data-year="2022">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Wayka</span>
+          <img src="images/wayka30.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Caso Solsiret: Hallan escondidos a condenados Brian Villanueva y Yolanda Castillo</p>
+          <p class="card-desc">Condenados por encubrir feminicidio contra Solsiret fueron encontrados escondidos en una casa. Habían permanecido inubicables durante 21 días.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://wayka.pe/imagenes-en-la-memoria-lo-que-vivieron-los-fotoperiodistas-en-las-protestas-contra-merino/"target="_blank" style="text-decoration:none;" data-medio="wayka" data-idioma="es" data-tema="protests" data-year="2021">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Wayka</span>
+          <img src="images/wayka31.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Imágenes en la memoria: Lo que vivieron los fotoperiodistas en las protestas contra Merino</p>
+          <p class="card-desc">Juan Mandamiento, Alonso Chero y Juan Zapata registraron las manifestaciones del 9 al 14 de noviembre de 2020. Sus fotografías son testimonios de la violencia policial que resistieron miles de jóvenes para que Manuel Merino abandone el poder que usurpó.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://wayka.pe/derechos-de-mujeres-y-poblacion-lgtbiq-en-peligro-durante-proximo-quinquenio/"target="_blank" style="text-decoration:none;" data-medio="wayka" data-idioma="es" data-tema="elections" data-year="2021">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Wayka</span>
+          <img src="images/wayka32.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Derechos de mujeres y población LGTBIQ en peligro durante próximo quinquenio</p>
+          <p class="card-desc">Con Ejecutivo y Legislativo conservador, se eliminarían derechos sexuales y reproductivos de mujeres y disidencias. Otros 3 proyectos de ley que reconocen derechos de personas LGTBIQ no avanzarían.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://wayka.pe/gestion-de-munoz-genero-perdidas-de-mas-de-s-26-mil-a-la-municipalidad-de-lima/"target="_blank" style="text-decoration:none;" data-medio="wayka" data-idioma="es" data-tema="peru" data-year="2021">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Wayka</span>
+          <img src="images/wayka33.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Gestión de Muñoz generó pérdidas de más de S/ 26 mil a la Municipalidad de Lima</p>
+          <p class="card-desc">Muñoz culminará su gestión inmerso en dos actos ilícitos. Desde que ocupó el sillón municipal, se benefició a empresas con contrataciones de casi medio millón de soles y se contrataron a 15 personas de forma irregular.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://wayka.pe/hablan-las-medicas-los-obstaculos-para-interrumpir-el-embarazo-forzado-de-ninas-victimas-de-violacion/"target="_blank" style="text-decoration:none;" data-medio="wayka" data-idioma="es" data-tema="health" data-year="2021">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Wayka</span>
+          <img src="images/wayka34.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Hablan las médicas: Los obstáculos para interrumpir el embarazo forzado de niñas víctimas de violación</p>
+          <p class="card-desc">Niñas víctimas de violación en Perú son obligadas a continuar embarazos por barreras legales y falta de acceso al aborto terapéutico, enfrentando graves riesgos para su salud física y mental en un sistema que no logra protegerlas.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://especiales.larepublica.pe/bofedales-en-emergencia/"target="_blank" style="text-decoration:none;" data-medio="larepublica" data-idioma="es" data-tema="environment" data-year="2021">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">La República</span>
+          <img src="images/infobae17.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Bofedales en emergencia</p>
+          <p class="card-desc">En los últimos cinco años, con el pago de todos los limeños, Sedapal recaudó más de 50 millones de soles. Parte de este dinero debió usarlo desde 2020 para empezar a recuperar los bofedales de Milloc, una de las fuentes de agua para Lima durante las épocas de sequía. La pandemia y la demora en la ejecución han sumado para que este sistema se siga degradando, por estar también a merced de los ladrones de las turbas. ¿Podrá rescatarse en unos años lo que se depreda desde 1980?</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://data.larepublica.pe/mujeres-afroperuanas-son-mas-vulnerables-ante-el-cambio-climatico/"target="_blank" style="text-decoration:none;" data-medio="larepublica" data-idioma="es" data-tema="environment" data-year="2021">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">La República</span>
+          <img src="images/larepublica1.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Mujeres afroperuanas son más vulnerables ante el cambio climático</p>
+          <p class="card-desc">Después del fenómeno El Niño Costero de 2017, las horas que Martha, Fiorella y Victoria le dedicaron a las tareas domésticas y de cuidado no remuneradas aumentaron. Ante desastres climáticos, el Estado aún no implementa medidas que alivien la carga de trabajo para ellas.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://larepublica.pe/sociedad/2020/07/11/coronavirus-en-peru-el-drama-de-quienes-tienen-familiares-en-camas-uci#google_vignette"target="_blank" style="text-decoration:none;" data-medio="larepublica" data-idioma="es" data-tema="health" data-year="2020">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">La República</span>
+          <img src="images/lr1.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">El drama de quienes tienen familiares en camas UCI</p>
+          <p class="card-desc">No hallan medicinas. El rocuronio y el midazolam se entregan en hospitales, pero no hay para todos los enfermos. Familiares gastan hasta S/ 2.800 en farmacias.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://larepublica.pe/sociedad/2020/07/11/coronavirus-en-peru-el-drama-de-quienes-tienen-familiares-en-camas-uci#google_vignette"target="_blank" style="text-decoration:none;" data-medio="larepublica" data-idioma="es" data-tema="genderviolence" data-year="2019">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">La República</span>
+          <img src="images/lr2.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">El dolor de unos padres que no saben quién desapareció a sus hijas</p>
+          <p class="card-desc">Rosario, Carlos y Patricia. Solsiret Rodríguez desapareció en 2016. Su expareja dice que viajó y dejó a sus hijos, pero la Policía descubrió que su celular fue usado por última vez en la casa de este. Estefany Díaz salió a una matiné con sus hijas y no volvió.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://larepublica.pe/sociedad/2020/07/10/coronavirus-en-peru-s-1200-al-dia-y-mucha-suerte-la-odisea-de-hallar-medicamentos-para-pacientes-covid-19-en-uci"target="_blank" style="text-decoration:none;" data-medio="larepublica" data-idioma="es" data-tema="health" data-year="2020">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">La República</span>
+          <img src="images/lr3.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">S/ 2.800 al día y suerte: la odisea de hallar medicinas para pacientes COVID-19 en UCI</p>
+          <p class="card-desc">Visitar todas las farmacias de la ciudad, luchar contra quienes te dicen primero S/ 65 y luego S/ 85 tras ver tu desesperación o pagar casi el triple porque "se agotaron los genéricos". El dolor que implica estar en UCI lo siente tanto el paciente como sus familiares.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://larepublica.pe/domingo/2019/08/19/una-lucha-sin-solsiret"target="_blank" style="text-decoration:none;" data-medio="larepublica" data-idioma="es" data-tema="genderviolence" data-year="2019">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">La República</span>
+          <img src="images/lr4.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Una lucha sin Solsiret</p>
+          <p class="card-desc">Solsiret Rodríguez, la activista desaparecida hace tres años, es un símbolo en la marcha Ni Una Menos. Ayer las mujeres salieron a las calles por cuarta vez: ¿qué reformas ha logrado el movimiento?</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://larepublica.pe/sociedad/2019/12/08/venezuela-crece-el-numero-de-extranjeras-victimas-de-trata-venezolanas-explotacion-sexual"target="_blank" style="text-decoration:none;" data-medio="larepublica" data-idioma="es" data-tema="humantraf" data-year="2019">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">La República</span>
+          <img src="images/lr5.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Crece el número de extranjeras víctimas de trata</p>
+          <p class="card-desc">Vulnerables e invisibles. Entre enero y setiembre de este año se rescató a 213 venezolanas, algunas de ellas menores de edad, que habían caído en manos de mafias de explotadores sexuales. El desconocimiento y la necesidad las hace presa fácil, dice la PNP.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://larepublica.pe/sociedad/2019/12/18/mcdonalds-fast-foods-no-respetan-derechos-laborales-no-hay-sindicatos-ni-permiten-formarlos#google_vignette"target="_blank" style="text-decoration:none;" data-medio="larepublica" data-idioma="es" data-tema="labor" data-year="2019">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">La República</span>
+          <img src="images/lr6.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Fast foods no respetan derechos laborales, no hay sindicatos ni permiten formarlos</p>
+          <p class="card-desc">Hasta octubre de este año, 194 personas fallecieron en sus centros de trabajo, según el Ministerio de Trabajo y Promoción del Empleo. Cifra supera los 151 casos reportados durante el año pasado.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://larepublica.pe/sociedad/2020/03/04/independencia-por-que-la-sociedad-peruana-tambien-es-responsable-del-asesinato-de-una-nina-de-4-anos-violencia-contra-la-mujer-payet"target="_blank" style="text-decoration:none;" data-medio="larepublica" data-idioma="es" data-tema="genderviolence" data-year="2020">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">La República</span>
+          <img src="images/lr7.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Independencia: la sociedad peruana y su responsabilidad en el asesinato de una niña de 4 años</p>
+          <p class="card-desc">Especialistas afirman que el único culpable del crimen es el asesino, quien podría ser un menor de 15 años. Hecho causó que vuelva a cuestionarse si las mujeres tienen derecho a decidir sobre sus cuerpos y si hay educación sexual y mental en las escuelas.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://larepublica.pe/sociedad/2020/08/23/solsiret-rodriguez-a-4-anos-de-la-desaparicion-de-la-activista-feminista-las-deudas-del-estado-con-las-familias-de-las-desaparecidas"target="_blank" style="text-decoration:none;" data-medio="larepublica" data-idioma="es" data-tema="genderviolence" data-year="2020">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">La República</span>
+          <img src="images/lr8.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">A 4 años de la desaparición de Solsiret: las deudas del Estado con las familias de las desaparecidas</p>
+          <p class="card-desc">Los padres de la activista feminista temen que el caso quede impune. Ellos piden prisión para toda la familia Villanueva Castillo, mientras el fiscal Mansilla continúa con las investigaciones para pedir condena contra los implicados.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://larepublica.pe/sociedad/2020/06/13/mujeres-desaparecidas-alistan-proyecto-para-fortalecer-su-busqueda-con-geolocalizacion"target="_blank" style="text-decoration:none;" data-medio="larepublica" data-idioma="es" data-tema="humanrights data-year="2020">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">La República</span>
+          <img src="images/lr9.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">Mujeres desaparecidas: alistan proyecto para fortalecer su búsqueda con geolocalización</p>
+          <p class="card-desc">Hasta el 14 de mayo, el Mininter reportó la ausencia de 4.252 mujeres. En el Congreso se busca exigir que las empresas de telefonía revelen en 24 horas desde dónde las llamaron sus posibles agresores. Pero ¿una norma es suficiente?</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="https://www.cosecharoja.org/quien-cuida-las-amas-de-casa-durante-la-pandemia/"target="_blank" style="text-decoration:none;" data-medio="cosecharoja" data-idioma="es" data-tema="health" data-year="2020">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Cosecha Roja</span>
+          <img src="images/cosecha1.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">¿Quién cuida a las amas de casa durante la pandemia?</p>
+          <p class="card-desc">El coronavirus obliga a que las madres de familia le dediquen más tiempo a las labores domésticas y de cuidado. Si recibieran un pago por este trabajo, superarían el aporte de la minería, la industria que más dinero le deja al país. Pero nadie valora esta ocupación.</p>
+        </div>
+      </div>
+    </a>
+
+
+  </div>
+  <div id="pagination"></div>
+</section>
+
+<!-- DATA VISUALIZATIONS -->
+<section class="page project-page" id="page-dataviz">
+  <h2 onclick="refreshDatavizPage()" style="cursor:pointer;">Data Visualizations</h2>
+
+  <div class="filters">
+
+    <div class="custom-filter nav-tooltip" data-tip="Medio" id="dataviz-dropdown-medio">
+      <button type="button" class="custom-filter-btn" onclick="toggleDatavizDropdown('dataviz-dropdown-medio')">
+        <span id="dataviz-dropdown-medio-label">Outlet</span>
+        <span class="custom-filter-arrow">▾</span>
+      </button>
+      <div class="custom-filter-menu">
+        <button type="button" onclick="setDatavizFilterValue('medio','all','Outlet')">Outlet</button>
+        <button type="button" onclick="setDatavizFilterValue('medio','personal','Personal Project')">Personal Project</button>
+        <button type="button" onclick="setDatavizFilterValue('medio','larepublica','La República')">La República</button>
+        <button type="button" onclick="setDatavizFilterValue('medio','palabra','Palabra NAHJ')">Palabra NAHJ</button>
+      </div>
+    </div>
+
+    <div class="custom-filter nav-tooltip" data-tip="Idioma" id="dataviz-dropdown-idioma">
+      <button type="button" class="custom-filter-btn" onclick="toggleDatavizDropdown('dataviz-dropdown-idioma')">
+        <span id="dataviz-dropdown-idioma-label">Language</span>
+        <span class="custom-filter-arrow">▾</span>
+      </button>
+      <div class="custom-filter-menu">
+        <button type="button" onclick="setDatavizFilterValue('idioma','all','Language')">Language</button>
+        <button type="button" onclick="setDatavizFilterValue('idioma','es','Español')">Español</button>
+        <button type="button" onclick="setDatavizFilterValue('idioma','en','English')">English</button>
+      </div>
+    </div>
+
+    <div class="custom-filter nav-tooltip" data-tip="Tema" id="dataviz-dropdown-tema">
+      <button type="button" class="custom-filter-btn" onclick="toggleDatavizDropdown('dataviz-dropdown-tema')">
+        <span id="dataviz-dropdown-tema-label">Topic</span>
+        <span class="custom-filter-arrow">▾</span>
+      </button>
+      <div class="custom-filter-menu">
+        <button type="button" onclick="setDatavizFilterValue('tema','all','Topic')">Topic</button>
+        <button type="button" onclick="setDatavizFilterValue('tema','immigration','Immigration')">Immigration</button>
+        <button type="button" onclick="setDatavizFilterValue('tema','poverty','Poverty')">Poverty</button>
+        <button type="button" onclick="setDatavizFilterValue('tema','labor','Labor')">Labor</button>
+        <button type="button" onclick="setDatavizFilterValue('tema','housing','Housing')">Housing</button>
+      </div>
+    </div>
+
+    <div class="custom-filter nav-tooltip" data-tip="Año" id="dataviz-dropdown-year">
+      <button type="button" class="custom-filter-btn" onclick="toggleDatavizDropdown('dataviz-dropdown-year')">
+        <span id="dataviz-dropdown-year-label">Year</span>
+        <span class="custom-filter-arrow">▾</span>
+      </button>
+      <div class="custom-filter-menu">
+        <button type="button" onclick="setDatavizFilterValue('year','all','Year')">Year</button>
+        <button type="button" onclick="setDatavizFilterValue('year','2025','2025')">2025</button>
+        <button type="button" onclick="setDatavizFilterValue('year','2024','2024')">2024</button>
+      </div>
+    </div>
+
+    <div class="filter-wrap">
+      <button class="reset-btn nav-tooltip" data-tip="Reiniciar" onclick="resetDatavizFilters()">✕ Reset</button>
+    </div>
+
+  </div>
+
+  <div class="cards-row" id="cards-dataviz">
+
+    <a href="projects/proyecto1_familias/index.html" target="_blank"
+        data-medio="personal" data-idioma="en" data-tema="poverty" data-year="2025">
+        <div class="card">
+          <div class="card-img">
+            <span class="badge">Personal Project</span>
+            <video autoplay muted loop playsinline>
+              <source src="images/familias-preview.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="card-body">
+            <p class="card-title">Single mothers face steep income gaps as poverty persists across U.S. states</p>
+            <p class="card-desc">
+              A state-by-state data visualization examining poverty, racial concentration and income shortfalls affecting families headed by single mothers.
+            </p>
+          </div>
+        </div>
+      </a>    
+    
+    <a href="https://www.palabranahj.org/archive/alone-in-court-the-us-governments-crackdown-on-unaccompanied-migrant-kids" target="_blank"
+        data-medio="palabra" data-idioma="en" data-tema="immigration" data-year="2025">
+        <div class="card">
+          <div class="card-img">
+            <span class="badge">Palabra NAHJ</span>
+            <video autoplay muted loop playsinline>
+              <source src="images/minors-preview.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="card-body">
+            <p class="card-title">Alone in Court: The U.S. Government’s Crackdown on Unaccompanied Migrant Kids</p>
+            <p class="card-desc">Funding cuts, raids, and Kafkaesque courtrooms leave thousands of children defenseless. Advocates say it’s by design.</p>
+          </div>
+        </div>
+      </a>
+
+    <a href="https://especiales.larepublica.pe/ninos-en-orfandad-feminicidios-sin-subsidio-mimp/" target="_blank"
+      data-medio="larepublica" data-idioma="es" data-tema="health" data-year="2020">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">La República</span>
+          <video autoplay muted loop playsinline>
+            <source src="images/subsidio-preview.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="card-body">
+          <p class="card-title">Afrontar el duelo encerrados y sin respaldo del Estado</p>
+          <p class="card-desc">
+            259 niñas, niños y adolescentes que quedaron en orfandad por feminicidios desde 2018 atravesaron la pandemia sin el subsidio estatal destinado a su atención. Sus tías y abuelas asumieron el cuidado mientras enfrentaban la paralización de los procesos judiciales.
+          </p>
+        </div>
+      </div>
+    </a>
+
+    <a href="projects/proyecto2_injuries/Animation/Animation.html" target="_blank"
+      data-medio="personal" data-idioma="en" data-tema="labor" data-year="2025">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Personal Project</span>
+          <video autoplay muted loop playsinline>
+            <source src="images/injuries-preview.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="card-body">
+          <p class="card-title">Workers at Risk in NYC: Exposing Deadly Injuries at Companies</p>
+          <p class="card-desc">This search tool, based on an OSHA database, provides information about companies located in New York City where workers have suffered serious physical injuries resulting in hospitalizations, amputations, or the loss of an eye.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="projects/proyecto3_bronx/NicolLeonStoryColor.html" target="_blank"
+      data-medio="personal" data-idioma="en" data-tema="housing" data-year="2024">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Personal Project</span>
+          <video autoplay muted loop playsinline>
+            <source src="images/bronx-preview.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="card-body">
+          <p class="card-title">After a Fire, Residents of One Bronx Building Have Waited Months For Repairs</p>
+          <p class="card-desc">After complaints about living conditions and then a fire, a court ordered the landlord to make repairs. Nine months later, tenants say the repairs have not been completed.</p>
+        </div>
+      </div>
+    </a>
+
+    <a href="projects/proyecto4_vendors/index.html" target="_blank"
+      data-medio="personal" data-idioma="en" data-tema="labor" data-year="2024">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">Personal Project</span>
+          <video autoplay muted loop playsinline>
+            <source src="images/vendors-preview.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="card-body">
+          <p class="card-title">NYC: Street vendors face most fines and summons in Queens</p>
+          <p class="card-desc">Elmhurst, Jackson Heights, Jamaica and Corona are the areas where the most fines and court summons have been issued against street vendors since January 2022, when the administration of Mayor Eric Adams began.</p>
+        </div>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- ART -->
+<section class="page project-page" id="page-art">
+  <h2>Art</h2>
+  <div class="cards-row">
+    <div class="card">
+      <div class="card-img">Image / thumbnail</div>
+      <div class="card-body">
+        <p class="card-title">Artwork Title</p>
+        <p class="card-desc">Medium, year, or a short description.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESUME -->
+<section class="page project-page" id="page-resume">
+  <h2 onclick="refreshResumePage()">Resume</h2>
+
+  <div class="download-wrapper">
+    <a href="files/NicolLeon_Resume_2026.pdf" download class="download-btn">
+      Download Resume
+    </a>
+  </div>
+
+  <div class="resume-container">
+    <img src="images/01NicolLeon_Resume_2026.jpg" alt="Nicol León Arge resume" class="resume-image">
+  </div>
+
+  
+</section>
+
+<script src="js/main.js"></script>
+</body>
+</html>
