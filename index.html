@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Nicol León Arge</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Caveat:wght@400;600&family=DM+Sans:wght@300;400;500&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
@@ -16,8 +17,7 @@
 
 <header class="header" style="z-index:200;">
 
-  <!-- izquierda: My work + Contact -->
-  <div class="header-left" style="display:flex; align-items:center; gap:2rem;">
+  <div class="header-left desktop-nav" style="display:flex; align-items:center; gap:2rem;">
     <div class="dropdown" id="projectsDD">
       <button onclick="toggleDD()" class="nav-tooltip" data-tip="Mi trabajo">My work ▾</button>
       <div class="dropdown-menu">
@@ -28,20 +28,31 @@
     <a href="mailto:nicol.leonarge36@journalism.cuny.edu" class="nav-tooltip" data-tip="Contáctame">Contact me</a>
   </div>
 
-  <!-- centro: nombre -->
-  <button class="logo" onclick="showPage('about')" style="position:absolute; left:50%; transform:translateX(-50%);">Nicol Leon Arge (she/her)</button>
+  <button id="hamburger" aria-label="Open menu" onclick="toggleMobileMenu()">☰</button>
 
-  <!-- derecha: About + Resume -->
-  <div class="header-right" style="display:flex; align-items:center; gap:2rem;">
-  <a onclick="showPage('about')" class="nav-tooltip" data-tip="Sobre mí">About Me</a>
-  <a onclick="refreshResumePage()" class="nav-tooltip" data-tip="CV">Resume</a>
-</div>
-
-  <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu">
-    <span></span><span></span><span></span>
+  <button class="logo" onclick="showPage('about')" style="position:absolute; left:50%; transform:translateX(-50%);">
+    Nicol Leon Arge (she/her)
   </button>
 
-</header>
+  <div class="header-right desktop-nav" style="display:flex; align-items:center; gap:2rem;">
+    <a onclick="showPage('about')" class="nav-tooltip" data-tip="Sobre mí">About Me</a>
+    <a onclick="refreshResumePage()" class="nav-tooltip" data-tip="CV">Resume</a>
+  </div>
+
+  <nav class="mobile-nav" id="mobileNav">
+    <button class="mobile-nav-link" onclick="toggleMobileProjects()">My work ▾</button>
+
+    <div class="mobile-subnav" id="mobileProjects">
+      <button onclick="showPage('writing'); closeMobileMenu()">Writing</button>
+      <button onclick="showPage('dataviz'); closeMobileMenu()">Data Visualizations</button>
+    </div>
+
+    <a href="mailto:nicol.leonarge36@journalism.cuny.edu" onclick="closeMobileMenu()">Contact me</a>
+    <button onclick="showPage('about'); closeMobileMenu()">About Me</button>
+    <button onclick="refreshResumePage(); closeMobileMenu()">Resume</button>
+  </nav>
+
+</header> 
 
 <!-- ABOUT -->
 <section class="page" id="page-about">
@@ -1503,7 +1514,7 @@
 
   <div class="cards-row" id="cards-dataviz">
 
-    <a href="projects/proyecto1_familias/index.html" target="_blank"
+    <a href="projects/proyecto1_familias/CardsProjectFinal.html" target="_blank"
         data-medio="personal" data-idioma="en" data-tema="poverty" data-year="2025">
         <div class="card">
           <div class="card-img">

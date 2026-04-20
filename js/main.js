@@ -301,3 +301,30 @@ function refreshResumePage() {
     });
   }
 }
+
+function toggleMobileMenu() {
+  const nav = document.getElementById('mobileNav');
+  const btn = document.getElementById('hamburger');
+  const open = nav.classList.toggle('open');
+
+  btn.textContent = open ? '✕' : '☰';
+  document.body.classList.toggle('menu-open', open);
+
+  if (!open) {
+    document.getElementById('mobileProjects').classList.remove('open');
+  }
+}
+
+function closeMobileMenu() {
+  const nav = document.getElementById('mobileNav');
+  const btn = document.getElementById('hamburger');
+
+  nav.classList.remove('open');
+  document.body.classList.remove('menu-open');
+  document.getElementById('mobileProjects').classList.remove('open');
+  btn.textContent = '☰';
+}
+
+function toggleMobileProjects() {
+  document.getElementById('mobileProjects').classList.toggle('open');
+}
