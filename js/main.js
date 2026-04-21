@@ -1,24 +1,31 @@
 const allPages = ['about', 'dataviz', 'writing', 'art', 'resume'];
 
-function showPage(name) {
-  // esconder todas inmediatamente sin delay
+function showPage(name, updateHash = true) {
+  const allPages = ['about', 'dataviz', 'writing', 'art', 'resume'];
+
   allPages.forEach(p => {
-    if (p === name) return;
     const el = document.getElementById('page-' + p);
+    if (!el) return;
     el.classList.remove('visible');
     el.classList.remove('active');
     el.style.display = 'none';
   });
 
   const target = document.getElementById('page-' + name);
+  if (!target) return;
+
   target.style.display = 'flex';
   target.classList.add('active');
-  requestAnimationFrame(() =>
-    requestAnimationFrame(() => target.classList.add('visible'))
-  );
 
-  document.getElementById('projectsDD').classList.remove('open');
-  document.getElementById('navLinks') && document.getElementById('navLinks').classList.remove('open');
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => target.classList.add('visible'));
+  });
+
+  const projectsDD = document.getElementById('projectsDD');
+  if (projectsDD) projectsDD.classList.remove('open');
+
+  const mobileNav = document.getElementById('mobileNav');
+  if (mobileNav) mobileNav.classList.remove('open');
 
   const pag = document.getElementById('pagination');
   if (pag) {
@@ -28,6 +35,10 @@ function showPage(name) {
     } else {
       pag.style.display = 'none';
     }
+  }
+
+  if (updateHash) {
+    window.location.hash = name;
   }
 }
 
@@ -206,7 +217,15 @@ function resetFilters() {
 
 window.addEventListener('load', () => {
   drawGrid();
-  showPage('about');
+
+  const savedPage = window.location.hash
+    ? window.location.hash.replace('#', '')
+    : 'about';
+
+  const validPages = ['about', 'dataviz', 'writing', 'art', 'resume'];
+  const pageToShow = validPages.includes(savedPage) ? savedPage : 'about';
+
+  showPage(pageToShow, false);
 });
 
 window.addEventListener('resize', drawGrid);
