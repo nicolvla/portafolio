@@ -712,25 +712,7 @@ body {
   border-radius: 2px;
 }
 
-.pagination {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  margin-top: 20px;
-  padding: 0 12px;
-}
 
-.pagination button,
-.pagination a {
-  font-size: 14px;
-  padding: 8px 12px;
-  min-width: 40px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-}
 
 .page-btn {
   font-family: var(--hand);
@@ -740,7 +722,7 @@ body {
   border: none;
   border-bottom: 2px solid #E5B21E;
   padding: 0 0.3rem;
-  margin-right: 0.8rem;
+  margin-right: 0;
   cursor: pointer;
   transition: all .2s;
 }
@@ -958,24 +940,6 @@ body {
     align-items: center;
     justify-content: center;
     z-index: 500;
-  }
-
-  .pagination {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    gap: 0.7rem;              /* 👈 más pequeño */
-    width: 100%;
-    margin-top: 12px;         /* 👈 menos espacio arriba */
-    padding: 1rem 0 2rem 0;   /* 👈 más espacio abajo (clave) */
-  }
-
-  .pagination button,
-  .pagination a {
-    font-size: 13px;
-    padding: 7px 10px;
-    min-width: 36px;
   }
 
   .logo {
@@ -1300,5 +1264,32 @@ body {
     height: auto;
     display: block;
     margin: 0 auto;
+  }
+}
+
+/* PAGINATION - DESKTOP */
+#page-writing #pagination {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1.2rem;
+  margin-top: 1.2rem;
+  padding: 0;
+  box-sizing: border-box;
+  align-self: stretch;
+}
+
+/* PAGINATION - MOBILE */
+@media (max-width: 768px) {
+  #page-writing #pagination {
+    justify-content: center;
+    gap: 0.7rem;
+    margin-top: 12px;
+    padding: 1rem 0 2rem 0;
+  }
+
+  #page-writing #pagination .page-btn {
+    font-size: 1.2rem;
   }
 }
