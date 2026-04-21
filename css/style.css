@@ -831,7 +831,7 @@ body {
   text-align: right;
   margin-top: 1rem;
   font-family: var(--hand);
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: #754b47;
 }
 
@@ -842,6 +842,7 @@ body {
 
 .contact-line a {
   color: #1c1c1c;
+  font-size: 1rem;
   text-decoration: none;
   border-bottom: 1px solid transparent;
   transition: border-color .2s, color .2s;
@@ -1127,15 +1128,15 @@ body {
   }
 
   .about-copy p.contact-line {
-    text-align: center !important;
-    margin-top: 0.9rem;
-    font-size: 0.95rem;
-  }
+  text-align: center !important;
+  margin-top: 0.9rem;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
 
-  .about-copy p.contact-line span,
-  .about-copy p.contact-line a {
-    font-size: 0.95rem;
-  }
+ .about-copy p.contact-line a {
+  font-size: 0.9rem;
+}
 
   .about-mobile-avatar {
     display: none !important;
@@ -1233,12 +1234,18 @@ body {
   }
 
   /* PAGINATION */
-  #pagination {
-    justify-content: center;
-    width: 100%;
-    gap: 1rem;
-    padding: 1rem 0 1.4rem 0;
-  }
+ #pagination {
+  display: flex;
+  gap: 1.2rem;
+  z-index: 999;
+  justify-content: flex-end;
+  width: 100%;
+  max-width: 100%;
+  padding: 1rem 0 1rem 0;
+  margin-top: auto;
+  margin-left: auto;
+  margin-right: 0;
+}
 
   .page-btn {
     font-size: 1.2rem;
