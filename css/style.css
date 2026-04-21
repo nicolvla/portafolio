@@ -1236,29 +1236,28 @@ body {
   /* PAGINATION */
  #pagination {
   display: flex;
-  justify-content: flex-end;
   gap: 1.2rem;
-  width: 100%;
-  max-width: calc(100% - 0rem);
+  z-index: 999;
   padding: 1rem 0 1rem 0;
   margin-top: auto;
-  margin-left: 0;
-  margin-right: 0;
-  z-index: 999;
 }
 
 @media (min-width: 769px) {
   #page-writing #pagination {
     width: 100%;
-    box-sizing: border-box;
-    padding-right: 0;
     justify-content: flex-end;
-    align-self: stretch;
-  }
-
-  #page-writing .cards-row {
-    width: 100%;
+    padding-right: 0;
+    margin-right: 0;
     box-sizing: border-box;
+  }
+}
+
+@media (max-width: 768px) {
+  #pagination {
+    justify-content: center;
+    width: 100%;
+    gap: 1rem;
+    padding: 1rem 0 1.4rem 0;
   }
 }
 
