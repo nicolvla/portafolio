@@ -61,7 +61,8 @@
     <div class="tape"></div>
     <div class="about-copy">
       <h1><span class="hola">¡Hola!</span></h1>
-    <p>Nicol León Arge is a bilingual (English/Spanish) reporter covering Latino communities and local news in the Tri-Cities region of Washington. Her work has appeared in The New York Times, Gothamist/WNYC Radio, Documented NY, The Arizona Republic, El País US/América, Palabra NAHJ, among other outlets. She previously worked as a reporter in Peru covering politics, human rights and social issues.</p>
+    <p>Nicol León Arge is a bilingual (English/Spanish) reporter covering Latino communities and local news in the Tri-Cities region of Washington.</p>
+    <p>Her work has appeared in The New York Times, Gothamist/WNYC Radio, Documented NY, The Arizona Republic, El País US/América, Palabra NAHJ, among other outlets. She previously worked as a reporter in Peru covering politics, human rights and social issues.</p>
     <p>She focuses on building trust with communities, verifying information with official entities, court filings and public records, and connecting Latinx immigrant audiences with key information to access resources and services funded by different levels of government. She has training in analyzing large datasets using Python, filing FOIA and FOIL requests and coding websites to present journalistic findings.</p>
     <p>She sees journalism as a counterbalance to power. She focuses on getting information that is essential for the public so people can better understand their rights and the systems that shape their lives.</p>
     <p>She earned a Master's in Bilingual Journalism from the Craig Newmark Graduate School of Journalism at CUNY with a specialization in Data Journalism.</p>
@@ -90,6 +91,7 @@
       <span class="custom-filter-arrow">▾</span>
     </button>
     <div class="custom-filter-menu">
+      <button type="button" onclick="setFilterValue('medio','tnyt','The New York Times')">The New York Times</button>
       <button type="button" onclick="setFilterValue('medio','documented','Documented NY')">Documented NY</button>
       <button type="button" onclick="setFilterValue('medio','laalianza','La Alianza')">La Alianza</button>
       <button type="button" onclick="setFilterValue('medio','gothamist','Gothamist/WNYC Radio')">Gothamist/WNYC Radio</button>
@@ -171,6 +173,19 @@
 </div>
   <div class="cards-row" id="cards-writing">
 
+    <a href="https://www.nytimes.com/2026/05/22/nyregion/staten-island-explosion.html?smid=nytcore-ios-share" target="_blank" style="text-decoration:none;" data-medio="tnyt" data-idioma="en" data-tema="nyc" data-year="2026">
+      <div class="card">
+        <div class="card-img">
+          <span class="badge">The New York Times</span>
+          <img src="images/tnyt1.jpg" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="card-body">
+          <p class="card-title">1 Person Killed and Dozens of Firefighters Injured in Staten Island Blasts</p>
+          <p class="card-desc">Two explosions rocked a barge on the North Shore of Staten Island, injuring 34 firefighters and emergency medical workers.</p>
+        </div>
+      </div>
+    </a>
+    
     <a href="https://laalianzanoticias.com/2026/04/24/cuidadoras-nueva-york-huelga-hambre-ley-turnos-24-horas/" target="_blank" style="text-decoration:none;" data-medio="laalianza" data-idioma="es" data-tema="labor" data-year="2026">
       <div class="card">
         <div class="card-img">
@@ -206,19 +221,6 @@
         <div class="card-body">
           <p class="card-title">In Harlem, Know-Your-Rights Volunteers Go Door to Door Before ICE Comes Knocking</p>
           <p class="card-desc">Indivisible Harlem volunteers are helping educate local businesses on how to respond if ICE agents arrive.</p>
-        </div>
-      </div>
-    </a>
-
-    <a href="https://laalianzanoticias.com/2026/04/02/que-derechos-tiene-si-ice-llega-a-su-trabajo-expertos-explican-que-deben-saber-trabajadoras-del-hogar-y-sus-empleadores/" target="_blank" style="text-decoration:none;" data-medio="laalianza" data-idioma="es" data-tema="immigration" data-year="2026">
-      <div class="card">
-        <div class="card-img">
-          <span class="badge">La Alianza</span>
-          <img src="images/laalianza3.jpg" style="width:100%; height:100%; object-fit:cover;">
-        </div>
-        <div class="card-body">
-          <p class="card-title">Qué Derechos tiene si ICE llega a su trabajo: expertos explican qué deben saber trabajadoras del hogar</p>
-          <p class="card-desc">Ante reportes de operativos migratorios puerta a puerta, crece la incertidumbre entre trabajadoras del hogar.</p>
         </div>
       </div>
     </a>
@@ -665,19 +667,6 @@
       </div>
     </a>
 
-    <a href="https://www.infobae.com/america/peru/2022/12/20/investigacion-de-muertes-de-manifestantes-en-el-fuero-militar-es-irregular/"target="_blank" style="text-decoration:none;" data-medio="infobae" data-idioma="es" data-tema="protests" data-year="2022">
-      <div class="card">
-        <div class="card-img">
-          <span class="badge">Infobae Perú</span>
-          <img src="images/infobae1.jpg" style="width:100%; height:100%; object-fit:cover;">
-        </div>
-        <div class="card-body">
-          <p class="card-title">Investigación de muertes de manifestantes en el fuero militar es irregular</p>
-          <p class="card-desc">A pesar de que contradice sentencias del Tribunal Constitucional y Corte Interamericana de Derechos Humanos, presidenta Dina Boluarte anunció que la justicia militar investigará la muerte de 22 personas durante las protestas contra su gobierno</p>
-        </div>
-      </div>
-    </a>
-
     <a href="https://www.infobae.com/america/peru/2022/11/06/congreso-insiste-en-aprobar-ley-que-discrimina-a-personas-migrantes/"target="_blank" style="text-decoration:none;" data-medio="infobae" data-idioma="es" data-tema="immigration" data-year="2022">
       <div class="card">
         <div class="card-img">
@@ -987,19 +976,6 @@
         <div class="card-body">
           <p class="card-title">Alberto Fujimori declarará sobre asesinato contra periodista Melissa Alfaro</p>
           <p class="card-desc">El próximo 23 de junio, el expresidente será interrogado por la Fiscalía en el marco de la investigación preliminar que le siguen por el presunto delito de homicidio calificado contra la periodista Melissa Alfaro.</p>
-        </div>
-      </div>
-    </a>
-
-    <a href="https://wayka.pe/mujer-migrante-no-obtiene-justicia-tras-7-anos-de-haber-denunciado-violencia/"target="_blank" style="text-decoration:none;" data-medio="wayka" data-idioma="es" data-tema="immigration" data-year="2022">
-      <div class="card">
-        <div class="card-img">
-          <span class="badge">Wayka</span>
-          <img src="images/wayka11.jpg" style="width:100%; height:100%; object-fit:cover;">
-        </div>
-        <div class="card-body">
-          <p class="card-title">Mujer migrante no obtiene justicia tras 7 años de haber denunciado violencia</p>
-          <p class="card-desc">Desde que el Poder Judicial condenó al agresor Joe Lavado, este no paga la reparación civil a Katherine Osorio, migrante colombiana. Tampoco cumple la demanda de alimentos, pero busca impedir que entreguen la patria potestad del hijo de 10 años.</p>
         </div>
       </div>
     </a>
@@ -1368,32 +1344,6 @@
       </div>
     </a>
 
-    <a href="https://larepublica.pe/sociedad/2019/12/18/mcdonalds-fast-foods-no-respetan-derechos-laborales-no-hay-sindicatos-ni-permiten-formarlos#google_vignette"target="_blank" style="text-decoration:none;" data-medio="larepublica" data-idioma="es" data-tema="labor" data-year="2019">
-      <div class="card">
-        <div class="card-img">
-          <span class="badge">La República</span>
-          <img src="images/lr6.jpg" style="width:100%; height:100%; object-fit:cover;">
-        </div>
-        <div class="card-body">
-          <p class="card-title">Fast foods no respetan derechos laborales, no hay sindicatos ni permiten formarlos</p>
-          <p class="card-desc">Hasta octubre de este año, 194 personas fallecieron en sus centros de trabajo, según el Ministerio de Trabajo y Promoción del Empleo.</p>
-        </div>
-      </div>
-    </a>
-
-    <a href="https://larepublica.pe/sociedad/2020/03/04/independencia-por-que-la-sociedad-peruana-tambien-es-responsable-del-asesinato-de-una-nina-de-4-anos-violencia-contra-la-mujer-payet"target="_blank" style="text-decoration:none;" data-medio="larepublica" data-idioma="es" data-tema="genderviolence" data-year="2020">
-      <div class="card">
-        <div class="card-img">
-          <span class="badge">La República</span>
-          <img src="images/lr7.jpg" style="width:100%; height:100%; object-fit:cover;">
-        </div>
-        <div class="card-body">
-          <p class="card-title">Independencia: la sociedad peruana y su responsabilidad en el asesinato de una niña de 4 años</p>
-          <p class="card-desc">Especialistas afirman que el único culpable del crimen es el asesino, quien podría ser un menor de 15 años. Hecho causó que vuelva a cuestionarse si las mujeres tienen derecho a decidir sobre sus cuerpos y si hay educación sexual y mental en las escuelas.</p>
-        </div>
-      </div>
-    </a>
-
     <a href="https://larepublica.pe/sociedad/2020/08/23/solsiret-rodriguez-a-4-anos-de-la-desaparicion-de-la-activista-feminista-las-deudas-del-estado-con-las-familias-de-las-desaparecidas"target="_blank" style="text-decoration:none;" data-medio="larepublica" data-idioma="es" data-tema="genderviolence" data-year="2020">
       <div class="card">
         <div class="card-img">
@@ -1612,13 +1562,13 @@
   <h2 onclick="refreshResumePage()">Resume</h2>
 
   <div class="download-wrapper">
-    <a href="files/NicolLeon_Resume_2026.pdf" download class="download-btn">
+    <a href="files/NicolLeonArge_Resume.pdf" download class="download-btn">
       Download Resume
     </a>
   </div>
 
   <div class="resume-container">
-    <img src="images/01NicolLeon_Resume_2026.jpg" alt="Nicol León Arge resume" class="resume-image">
+    <img src="images/NicolLeon_Resume_2026.jpg" alt="Nicol León Arge resume" class="resume-image">
   </div>
 
   
